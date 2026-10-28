@@ -1,0 +1,133 @@
+"analysis","metric","contrast","observed","p_value","n_perm","N_group","core_type"
+"A: core type","amf_amf_frac","Enriched - Suppressed",-0.0112551502361571,0.857,999,NA,NA
+"A: core type","amf_present","Enriched - Suppressed",0,1,999,NA,NA
+"A: core type","cross_density","Enriched - Suppressed",0.00401511572980633,0.113,999,NA,NA
+"A: core type","cross_density_present","Enriched - Suppressed",0.00507821974290565,0.113,999,NA,NA
+"A: core type","cross_frac","Enriched - Suppressed",0.116721937493719,0.027,999,NA,NA
+"A: core type","density","Enriched - Suppressed",-0.00328831473869642,0.155,999,NA,NA
+"A: core type","density_present","Enriched - Suppressed",-0.00353518199978818,0.187,999,NA,NA
+"A: core type","diaz_diaz_frac","Enriched - Suppressed",-0.105466787257562,0.069,999,NA,NA
+"A: core type","n_present","Enriched - Suppressed",-1,0.928,999,NA,NA
+"A: core type","nif_present","Enriched - Suppressed",-1,0.629,999,NA,NA
+"A: core type","positive_frac","Enriched - Suppressed",-0.0319565872776605,0.445,999,NA,NA
+"B: core type within N group","amf_amf_frac","Enriched - Suppressed",-0.16285140562249,0.204,999,"Low",NA
+"B: core type within N group","amf_present","Enriched - Suppressed",-17,0.337,999,"Low",NA
+"B: core type within N group","cross_density","Enriched - Suppressed",0.00165328294756731,0.843,999,"Low",NA
+"B: core type within N group","cross_density_present","Enriched - Suppressed",0.0149992472146944,0.011,999,"Low",NA
+"B: core type within N group","cross_frac","Enriched - Suppressed",0.19578313253012,0.02,999,"Low",NA
+"B: core type within N group","density","Enriched - Suppressed",-0.00434527304756312,0.628,999,"Low",NA
+"B: core type within N group","density_present","Enriched - Suppressed",0.000763327751009724,0.931,999,"Low",NA
+"B: core type within N group","diaz_diaz_frac","Enriched - Suppressed",-0.0329317269076305,0.903,999,"Low",NA
+"B: core type within N group","n_present","Enriched - Suppressed",-17,0.282,999,"Low",NA
+"B: core type within N group","nif_present","Enriched - Suppressed",0,1,999,"Low",NA
+"B: core type within N group","positive_frac","Enriched - Suppressed",-0.107831325301205,0.112,999,"Low",NA
+"B: core type within N group","amf_amf_frac","Enriched - Suppressed",0.119257086999022,0.263,999,"Intermediate",NA
+"B: core type within N group","amf_present","Enriched - Suppressed",11,0.337,999,"Intermediate",NA
+"B: core type within N group","cross_density","Enriched - Suppressed",0.00188946622579121,0.299,999,"Intermediate",NA
+"B: core type within N group","cross_density_present","Enriched - Suppressed",0.00483351235230934,0.589,999,"Intermediate",NA
+"B: core type within N group","cross_frac","Enriched - Suppressed",0.234604105571848,0.194,999,"Intermediate",NA
+"B: core type within N group","density","Enriched - Suppressed",0.000234879624192602,0.946,999,"Intermediate",NA
+"B: core type within N group","density_present","Enriched - Suppressed",-0.0013907720119972,0.807,999,"Intermediate",NA
+"B: core type within N group","diaz_diaz_frac","Enriched - Suppressed",-0.35386119257087,0.168,999,"Intermediate",NA
+"B: core type within N group","n_present","Enriched - Suppressed",4,0.813,999,"Intermediate",NA
+"B: core type within N group","nif_present","Enriched - Suppressed",-7,0.104,999,"Intermediate",NA
+"B: core type within N group","positive_frac","Enriched - Suppressed",-0.0430107526881721,0.744,999,"Intermediate",NA
+"B: core type within N group","amf_amf_frac","Enriched - Suppressed",0.0625,0.285,999,"High",NA
+"B: core type within N group","amf_present","Enriched - Suppressed",0,1,999,"High",NA
+"B: core type within N group","cross_density","Enriched - Suppressed",-0.000236183278223902,0.476,999,"High",NA
+"B: core type within N group","cross_density_present","Enriched - Suppressed",-0.00439591605218378,0.776,999,"High",NA
+"B: core type within N group","cross_frac","Enriched - Suppressed",0.0516304347826087,0.694,999,"High",NA
+"B: core type within N group","density","Enriched - Suppressed",-0.000822078684674104,0.289,999,"High",NA
+"B: core type within N group","density_present","Enriched - Suppressed",-0.00511497958306469,0.293,999,"High",NA
+"B: core type within N group","diaz_diaz_frac","Enriched - Suppressed",-0.114130434782609,0.399,999,"High",NA
+"B: core type within N group","n_present","Enriched - Suppressed",-2,0.756,999,"High",NA
+"B: core type within N group","nif_present","Enriched - Suppressed",-2,0.713,999,"High",NA
+"B: core type within N group","positive_frac","Enriched - Suppressed",0.247282608695652,0.193,999,"High",NA
+"B: N group and N x core","amf_amf_frac","High - Low",-0.283333333333333,0.069,999,NA,"Hyphae Suppressed"
+"B: N group and N x core","amf_amf_frac","Intermediate - Low",-0.251075268817204,0.082,999,NA,"Hyphae Suppressed"
+"B: N group and N x core","amf_present","High - Low",-37,0.003,999,NA,"Hyphae Suppressed"
+"B: N group and N x core","amf_present","Intermediate - Low",-33,0.005,999,NA,"Hyphae Suppressed"
+"B: N group and N x core","cross_density","High - Low",-0.00566839867737364,0.098,999,NA,"Hyphae Suppressed"
+"B: N group and N x core","cross_density","Intermediate - Low",-0.00614076523382145,0.063,999,NA,"Hyphae Suppressed"
+"B: N group and N x core","cross_density_present","High - Low",0.0213335854288775,0.457457457457457,998,NA,"Hyphae Suppressed"
+"B: N group and N x core","cross_density_present","Intermediate - Low",-0.00334605386870195,0.919,999,NA,"Hyphae Suppressed"
+"B: N group and N x core","cross_frac","High - Low",0.0108695652173913,0.931,999,NA,"Hyphae Suppressed"
+"B: N group and N x core","cross_frac","Intermediate - Low",-0.120967741935484,0.355,999,NA,"Hyphae Suppressed"
+"B: N group and N x core","density","High - Low",-0.0113916617733412,0.01,999,NA,"Hyphae Suppressed"
+"B: N group and N x core","density","Intermediate - Low",-0.0104521432765708,0.022,999,NA,"Hyphae Suppressed"
+"B: N group and N x core","density_present","High - Low",-0.00559910414333707,0.959,999,NA,"Hyphae Suppressed"
+"B: N group and N x core","density_present","Intermediate - Low",-0.00745214099077481,0.933,999,NA,"Hyphae Suppressed"
+"B: N group and N x core","diaz_diaz_frac","High - Low",0.272463768115942,0.219,999,NA,"Hyphae Suppressed"
+"B: N group and N x core","diaz_diaz_frac","Intermediate - Low",0.372043010752688,0.062,999,NA,"Hyphae Suppressed"
+"B: N group and N x core","n_present","High - Low",-48,0.003,999,NA,"Hyphae Suppressed"
+"B: N group and N x core","n_present","Intermediate - Low",-38,0.017,999,NA,"Hyphae Suppressed"
+"B: N group and N x core","nif_present","High - Low",-11,0.045,999,NA,"Hyphae Suppressed"
+"B: N group and N x core","nif_present","Intermediate - Low",-5,0.473,999,NA,"Hyphae Suppressed"
+"B: N group and N x core","positive_frac","High - Low",-0.0847826086956522,0.659,999,NA,"Hyphae Suppressed"
+"B: N group and N x core","positive_frac","Intermediate - Low",0.0596774193548387,0.75,999,NA,"Hyphae Suppressed"
+"B: N group and N x core","amf_amf_frac","High - Low",-0.0579819277108434,0.677,999,NA,"Hyphae Enriched"
+"B: N group and N x core","amf_amf_frac","Intermediate - Low",0.0310332238043081,0.818,999,NA,"Hyphae Enriched"
+"B: N group and N x core","amf_present","High - Low",-20,0.04,999,NA,"Hyphae Enriched"
+"B: N group and N x core","amf_present","Intermediate - Low",-5,0.664,999,NA,"Hyphae Enriched"
+"B: N group and N x core","cross_density","High - Low",-0.00755786490316486,0.001,999,NA,"Hyphae Enriched"
+"B: N group and N x core","cross_density","Intermediate - Low",-0.00590458195559754,0.001,999,NA,"Hyphae Enriched"
+"B: N group and N x core","cross_density_present","High - Low",0.0019384221619994,0.899,999,NA,"Hyphae Enriched"
+"B: N group and N x core","cross_density_present","Intermediate - Low",-0.013511788731087,0.32,999,NA,"Hyphae Enriched"
+"B: N group and N x core","cross_frac","High - Low",-0.13328313253012,0.346,999,NA,"Hyphae Enriched"
+"B: N group and N x core","cross_frac","Intermediate - Low",-0.0821467688937568,0.505,999,NA,"Hyphae Enriched"
+"B: N group and N x core","density","High - Low",-0.00786846741045214,0.001,999,NA,"Hyphae Enriched"
+"B: N group and N x core","density","Intermediate - Low",-0.00587199060481503,0.007,999,NA,"Hyphae Enriched"
+"B: N group and N x core","density_present","High - Low",-0.0114774114774115,0.529,999,NA,"Hyphae Enriched"
+"B: N group and N x core","density_present","Intermediate - Low",-0.00960624075378174,0.416,999,NA,"Hyphae Enriched"
+"B: N group and N x core","diaz_diaz_frac","High - Low",0.191265060240964,0.352,999,NA,"Hyphae Enriched"
+"B: N group and N x core","diaz_diaz_frac","Intermediate - Low",0.0511135450894487,0.794,999,NA,"Hyphae Enriched"
+"B: N group and N x core","n_present","High - Low",-33,0.012,999,NA,"Hyphae Enriched"
+"B: N group and N x core","n_present","Intermediate - Low",-17,0.237,999,NA,"Hyphae Enriched"
+"B: N group and N x core","nif_present","High - Low",-13,0.037,999,NA,"Hyphae Enriched"
+"B: N group and N x core","nif_present","Intermediate - Low",-12,0.059,999,NA,"Hyphae Enriched"
+"B: N group and N x core","positive_frac","High - Low",0.270331325301205,0.175,999,NA,"Hyphae Enriched"
+"B: N group and N x core","positive_frac","Intermediate - Low",0.124497991967871,0.323,999,NA,"Hyphae Enriched"
+"B: N group and N x core","amf_amf_frac","N x core (Enriched - Suppressed): High - Low",0.22535140562249,0.24,999,NA,NA
+"B: N group and N x core","amf_amf_frac","N x core (Enriched - Suppressed): Intermediate - Low",0.282108492621512,0.105,999,NA,NA
+"B: N group and N x core","amf_present","N x core (Enriched - Suppressed): High - Low",17,0.257,999,NA,NA
+"B: N group and N x core","amf_present","N x core (Enriched - Suppressed): Intermediate - Low",28,0.058,999,NA,NA
+"B: N group and N x core","cross_density","N x core (Enriched - Suppressed): High - Low",-0.00188946622579121,0.471,999,NA,NA
+"B: N group and N x core","cross_density","N x core (Enriched - Suppressed): Intermediate - Low",0.000236183278223901,0.986,999,NA,NA
+"B: N group and N x core","cross_density_present","N x core (Enriched - Suppressed): High - Low",-0.0193951632668781,0.383383383383383,998,NA,NA
+"B: N group and N x core","cross_density_present","N x core (Enriched - Suppressed): Intermediate - Low",-0.010165734862385,0.755,999,NA,NA
+"B: N group and N x core","cross_frac","N x core (Enriched - Suppressed): High - Low",-0.144152697747512,0.426,999,NA,NA
+"B: N group and N x core","cross_frac","N x core (Enriched - Suppressed): Intermediate - Low",0.038820973041727,0.819,999,NA,NA
+"B: N group and N x core","density","N x core (Enriched - Suppressed): High - Low",0.00352319436288902,0.512,999,NA,NA
+"B: N group and N x core","density","N x core (Enriched - Suppressed): Intermediate - Low",0.00458015267175573,0.834,999,NA,NA
+"B: N group and N x core","density_present","N x core (Enriched - Suppressed): High - Low",-0.00587830733407441,0.808,999,NA,NA
+"B: N group and N x core","density_present","N x core (Enriched - Suppressed): Intermediate - Low",-0.00215409976300693,0.971,999,NA,NA
+"B: N group and N x core","diaz_diaz_frac","N x core (Enriched - Suppressed): High - Low",-0.0811987078749781,0.785,999,NA,NA
+"B: N group and N x core","diaz_diaz_frac","N x core (Enriched - Suppressed): Intermediate - Low",-0.32092946566324,0.221,999,NA,NA
+"B: N group and N x core","n_present","N x core (Enriched - Suppressed): High - Low",15,0.401,999,NA,NA
+"B: N group and N x core","n_present","N x core (Enriched - Suppressed): Intermediate - Low",21,0.221,999,NA,NA
+"B: N group and N x core","nif_present","N x core (Enriched - Suppressed): High - Low",-2,0.78,999,NA,NA
+"B: N group and N x core","nif_present","N x core (Enriched - Suppressed): Intermediate - Low",-7,0.212,999,NA,NA
+"B: N group and N x core","positive_frac","N x core (Enriched - Suppressed): High - Low",0.355113933996857,0.063,999,NA,NA
+"B: N group and N x core","positive_frac","N x core (Enriched - Suppressed): Intermediate - Low",0.0648205726130328,0.776,999,NA,NA
+"C: N group, pooled","amf_amf_frac","High - Low",-0.22476397966594,0.182,999,NA,NA
+"C: N group, pooled","amf_amf_frac","Intermediate - Low",-0.1947128287708,0.164,999,NA,NA
+"C: N group, pooled","amf_present","High - Low",-58,0.001,999,NA,NA
+"C: N group, pooled","amf_present","Intermediate - Low",-29,0.107,999,NA,NA
+"C: N group, pooled","cross_density","High - Low",-0.00732168162494095,0.216,999,NA,NA
+"C: N group, pooled","cross_density","Intermediate - Low",-0.00472366556447803,0.277,999,NA,NA
+"C: N group, pooled","cross_density_present","High - Low",0.00401757853130851,0.861,999,NA,NA
+"C: N group, pooled","cross_density_present","Intermediate - Low",-0.00141027549170548,0.885,999,NA,NA
+"C: N group, pooled","cross_frac","High - Low",0.0718954248366013,0.59,999,NA,NA
+"C: N group, pooled","cross_frac","Intermediate - Low",-0.0483091787439613,0.632,999,NA,NA
+"C: N group, pooled","density","High - Low",-0.0170287727539636,0.003,999,NA,NA
+"C: N group, pooled","density","Intermediate - Low",-0.00822078684674104,0.123,999,NA,NA
+"C: N group, pooled","density_present","High - Low",-0.00971155912198363,0.809,999,NA,NA
+"C: N group, pooled","density_present","Intermediate - Low",0.00137992243801605,0.909,999,NA,NA
+"C: N group, pooled","diaz_diaz_frac","High - Low",0.152868554829339,0.33,999,NA,NA
+"C: N group, pooled","diaz_diaz_frac","Intermediate - Low",0.243022007514761,0.099,999,NA,NA
+"C: N group, pooled","n_present","High - Low",-69,0.001,999,NA,NA
+"C: N group, pooled","n_present","Intermediate - Low",-33,0.109,999,NA,NA
+"C: N group, pooled","nif_present","High - Low",-11,0.012,999,NA,NA
+"C: N group, pooled","nif_present","Intermediate - Low",-4,0.512,999,NA,NA
+"C: N group, pooled","positive_frac","High - Low",-0.115468409586057,0.429,999,NA,NA
+"C: N group, pooled","positive_frac","Intermediate - Low",-0.0515297906602254,0.504,999,NA,NA

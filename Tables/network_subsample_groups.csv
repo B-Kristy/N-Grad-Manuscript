@@ -1,0 +1,10 @@
+"analysis","stratum","N_group","n_cores","n_present_mean","n_present_lo","n_present_hi","nif_present_mean","nif_present_lo","nif_present_hi","amf_present_mean","amf_present_lo","amf_present_hi"
+"B: N within core type","Hyphae Enriched","Low",17,73.4144144144144,69,77,52.9399399399399,51,54,20.4744744744745,16,24
+"B: N within core type","Hyphae Enriched","Intermediate",17,52.4894894894895,47,57,39.5125125125125,38,41,12.976976976977,8,17
+"B: N within core type","Hyphae Enriched","High",17,45,45,45,41,41,41,4,4,4
+"B: N within core type","Hyphae Suppressed","Low",14,75.3213213213213,66,84,52.6176176176176,50,54,22.7037037037037,13,31
+"B: N within core type","Hyphae Suppressed","Intermediate",14,52.7057057057057,49,55,46.9399399399399,45,49,5.76576576576577,2,8
+"B: N within core type","Hyphae Suppressed","High",14,47,47,47,43,43,43,4,4,4
+"C: N group, pooled","Pooled","Low",31,113.592592592593,105,120,56.5925925925926,55,57,57,49,63.05
+"C: N group, pooled","Pooled","Intermediate",31,80.012012012012,75,85.05,51.4034034034034,48,53,28.6086086086086,23,34
+"C: N group, pooled","Pooled","High",31,54,54,54,46,46,46,8,8,8

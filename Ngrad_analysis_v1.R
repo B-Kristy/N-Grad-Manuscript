@@ -47,6 +47,9 @@ lsu <- readRDS("amf_phylo.rds")
 # NifH dataset (unrarefied)
 nif <- readRDS("nifH_phylo.rds")
 
+# Output folders: final figures/tables, and working figures not in the manuscript
+for (d in c("Figures", "Figures/other", "Tables")) dir.create(d, showWarnings = FALSE)
+
 # Create N Treatment labels 
 N_treatment_labels <- c(expression("SF1 (0 kg N "* ha^{-1}*")"),
                         expression("SF2 (28 kg N "* ha^{-1}*")"),
@@ -495,7 +498,7 @@ lsu_div
 div_plots_wleg <- panel_figure(list(nif_div, lsu_div))
 div_plots_wleg
 
-ggsave("Figures/hill_num_plots.png",
+ggsave("Figures/other/hill_num_plots.png",
        plot = div_plots_wleg, dpi = 600, width = 10, height = 5)
 
 
@@ -588,7 +591,7 @@ pairs(erh_fert_core, by = NULL) %>%
 fun_plots_wleg <- panel_figure(list(flnf, erh))
 fun_plots_wleg
 
-ggsave("Figures/flnf_erh_plots.png",
+ggsave("Figures/other/flnf_erh_plots.png",
        plot = fun_plots_wleg, dpi = 600, width = 10, height = 5)
 
 # Diversity + function (Figure 1)
@@ -722,7 +725,7 @@ chem_pca <- ggplot(chem_ord_sum, aes(x = Mean_PC1, y = Mean_PC2)) +
   )
 chem_pca
 
-ggsave("Figures/soil_chem_PCA.png",
+ggsave("Figures/other/soil_chem_PCA.png",
        plot = chem_pca, dpi = 600, width = 8, height = 5)
 
 
@@ -1402,7 +1405,7 @@ nif_cores_paired   <- paired_cores(nif_subset)
 nif_core_da_pairs  <- core_type_da_pairs(nif_cores_paired, nif_tax_ranks)
 compare_core_models(res_coretype, nif_core_da_pairs$res)
 
-# Core-type responders (supplementary figure, panel A)
+# Core-type responders (Figure 3A, assembled at the end of the script)
 deseq_core_nif <- plot_lollipop(nif_top_core,
                                 fill_var     = "Phylum",
                                 fill_scale   = scale_fill_observable(),
@@ -1446,7 +1449,7 @@ nif_sig_N <- res_within_core %>%
   mutate(direction = if_else(log2FoldChange > 0, "Positive", "Negative"))
 dplyr::count(nif_sig_N, core_type, direction)
 
-# Top N responders per core type (Figure 3A)
+# Top N responders per core type (Figure 4A)
 deseq_nif <- plot_lollipop(top_responders(res_within_core),
                            fill_var   = "Phylum",
                            fill_scale = scale_fill_observable(),
@@ -1556,7 +1559,7 @@ outliers_below <- nif_N_neg %>% filter(outlier_group == grp_sup) %>% arrange(dpl
 outliers_above
 outliers_below
 
-# N responses with labelled outliers (Figure 4A)
+# N responses with labelled outliers (Figure S4A)
 N_curve <- ggplot(nif_N_neg, aes(x = log2FoldChange__HyphaeEnriched,
                                  y = log2FoldChange__HyphaeSuppressed)) +
   geom_abline(slope = 1, intercept = 0, linetype = 2, linewidth = 1) +
@@ -1587,7 +1590,7 @@ nif_outlier_flnf <- fit_models(nif_outlier_df, "n_fixation",
 check_fit(nif_outlier_flnf)
 nif_outlier_flnf$anova_t2
 
-# Outlier abundance vs FLNF (Figure 4B)
+# Outlier abundance vs FLNF (Figure S4B)
 nif_outlier_long <- nif_outlier_df %>%
   filter(!is.na(n_fixation)) %>%
   dplyr::select(Site, n_fixation, Hyphae_Enriched_Sensitive, Hyphae_Suppressed_Sensitive) %>%
@@ -1625,7 +1628,7 @@ flnf_outlier_plot <- ggplot(nif_outlier_long, aes(x = Relative_Abundance, y = n_
   theme(panel.grid.minor = element_blank())
 flnf_outlier_plot
 
-# Figure 4: N-response outliers and FLNF (legend below)
+# Figure S4: N-response outliers and FLNF (legend below)
 common_theme <- theme(plot.margin  = margin(10, 10, 10, 10),
                       legend.position = "none",
                       axis.title.y = element_text(margin = margin(r = 12)),
@@ -1639,7 +1642,7 @@ fig_N_outliers <- plot_grid(
 )
 fig_N_outliers
 
-ggsave("Figures/Figure_4.png", plot = fig_N_outliers, dpi = 600, width = 16, height = 7.5)
+ggsave("Figures/Figure_S4.png", plot = fig_N_outliers, dpi = 600, width = 16, height = 7.5)
 
 
 ## LSU ######################################
@@ -1670,7 +1673,7 @@ lsu_cores_paired  <- paired_cores(lsu_subset)
 lsu_core_da_pairs <- core_type_da_pairs(lsu_cores_paired, lsu_tax_ranks)
 compare_core_models(res_coretype_lsu, lsu_core_da_pairs$res)
 
-# Core-type responders (supplementary figure, panel B)
+# Core-type responders (Figure S3)
 deseq_core_lsu <- plot_lollipop(lsu_top_core,
                                 fill_var     = "family",
                                 fill_scale   = scale_fill_npg(),
@@ -1681,13 +1684,7 @@ deseq_core_lsu <- plot_lollipop(lsu_top_core,
                                 size_by_padj = TRUE)
 deseq_core_lsu
 
-# Core-type responders, both datasets
-fig_deseq_core <- plot_grid(deseq_core_nif, deseq_core_lsu, ncol = 1,
-                            align = "v", axis = "lr",
-                            labels = c("A", "B"), label_fontface = "bold", label_size = 16)
-fig_deseq_core
-
-ggsave("Figures/deseq_core_type.png", plot = fig_deseq_core, dpi = 600, width = 10, height = 12)
+ggsave("Figures/Figure_S3.png", plot = deseq_core_lsu, dpi = 600, width = 10, height = 7)
 
 
 ### Core-type x N interaction
@@ -1705,7 +1702,7 @@ dplyr::count(lsu_sig_N, core_type, direction)
 # AMF taxa whose N response differs between core types
 filter(lsu_slope_diff, !is.na(padj), padj < 0.05)
 
-# Top N responders per core type (Figure 3B)
+# Top N responders per core type (Figure 4B)
 deseq_lsu <- plot_lollipop(top_responders(res_within_core_lsu),
                            fill_var   = "family",
                            fill_scale = scale_fill_npg(),
@@ -1716,7 +1713,7 @@ deseq_lsu <- plot_lollipop(top_responders(res_within_core_lsu),
 deseq_lsu
 
 
-## Figure 3: N responders, nifH and LSU ######
+## Figure 4: N responders, nifH and LSU ######
 # Remove legends, align panels vertically, then add legends back
 aligned <- cowplot::align_plots(deseq_nif + theme(legend.position = "none"),
                                 deseq_lsu + theme(legend.position = "none"),
@@ -1732,12 +1729,14 @@ lsu_row <- plot_grid(aligned[[2]], cowplot::get_legend(deseq_lsu),
 fig_deseq_N <- plot_grid(nif_row, lsu_row, ncol = 1)
 fig_deseq_N
 
-ggsave("Figures/Figure_3.png", plot = fig_deseq_N, dpi = 600, width = 17, height = 10)
+ggsave("Figures/Figure_4.png", plot = fig_deseq_N, dpi = 600, width = 17, height = 10)
 
 
 
 ## ============================== Co-occurrence Networks (SpiecEasi) =======================================
-## AMF-diazotroph networks. Diazotrophs: genus level; AMF: ASV level.
+## AMF-diazotroph networks. Diazotrophs: genus level; AMF: ASV level by
+## default (NET_LSU_RANK = "genus" for genus level). Each domain has its own
+## pool filter, so the finer AMF resolution does not inflate the taxon count.
 ##
 ##   A. Core type (all N pooled)        2 networks  (Hyphae Suppressed, Hyphae Enriched)
 ##   B. N group x core type             6 networks  (Low/Intermediate/High x core type)
@@ -1746,7 +1745,12 @@ ggsave("Figures/Figure_3.png", plot = fig_deseq_N, dpi = 600, width = 17, height
 ## Common steps for every network
 ##   - soil cores in both datasets, above the rarefaction depths
 ##     (nif_depth, lsu_depth) and without the LSU outlier cores
-##   - the same taxa in every network of an analysis (prevalent in each)
+##   - ONE shared taxon pool for every network and analysis, chosen from all
+##     network cores (prevalence and mean relative abundance, set per
+##     domain: NET_MIN_PREV / NET_MIN_ABUND). Each network is fitted on the pool taxa
+##     present in >= NET_MIN_CORES of its cores; absent taxa have no edges.
+##     Metrics are reported on the whole pool (turnover + rewiring) and on
+##     the present taxa only (rewiring among taxa that co-occur).
 ##   - clr within each domain; group means removed before inference
 ##       A, B: plot means           C: plot means + core-type effect
 ##   - MB neighbourhood selection, lambda chosen by StARS (pulsar)
@@ -1760,6 +1764,13 @@ ggsave("Figures/Figure_3.png", plot = fig_deseq_N, dpi = 600, width = 17, height
 ## N groups (NET_N_BREAKS): Low = 0-28, Intermediate = 56-84, High = 140-196.
 ## Liming began at 84 kg N, so "Intermediate" mixes unlimed (56) and limed (84)
 ## plots; change NET_N_BREAKS / NET_N_GROUPS to group by liming instead.
+## Core-count check (N contrasts only): N groups differ in their number of
+## cores, and the number of taxa present depends on it. Within each core type
+## (and pooled), every N group is repeatedly subsampled to the smallest group's
+## core count and the present taxa are recounted. Core-type contrasts need no
+## check: swapping labels within pairs keeps each network's core count, so the
+## permutation null already has the observed imbalance. Densities are not
+## checked this way (refitting at a fixed lambda with fewer cores inflates them).
 ## Runtime: with NET_RUN_TESTS = TRUE and NET_N_PERM = 999, analysis B refits
 ## 6 networks x 999 x 2 test types. Set NET_RUN_TESTS <- FALSE while iterating.
 
@@ -1768,19 +1779,30 @@ library(pulsar)
 library(ggnewscale)
 
 ### Parameters
-NET_MIN_PREV   <- 0.01   # taxa must occur in >= this share of cores in EVERY network
+NET_LSU_RANK   <- "asv"  # AMF resolution: "asv" or "genus"
+# Taxon pool filters, per domain: present in >= NET_MIN_PREV of all network cores
+# and mean relative abundance (within domain) >= NET_MIN_ABUND. Keep the pool
+# at <= ~100 taxa in total; ASVs need a stricter filter than genera.
+NET_MIN_PREV   <- c(nif = 0.025, lsu = 0.10)
+NET_MIN_ABUND  <- c(nif = 0.00025, lsu = 0.001)
+NET_MIN_CORES  <- 3      # a pool taxon enters a network if present in >= this many of its cores
 NET_LMIN_RATIO <- 1e-1   # end of lambda path (lmax x NET_LMIN_RATIO)
 NET_NLAMBDA    <- 100
 NET_REP_NUM    <- 100    # StARS subsamples
 NET_EDGE_FREQ  <- 0.50   # stable edge: selected in >= 50% of subsamples
-NET_RUN_TESTS  <- FALSE   # permutation tests
+NET_RUN_TESTS  <- TRUE   # permutation tests
+NET_RUN_SUBSAMPLE <- TRUE  # core-count check
+NET_SUB_REPS   <- 999    # subsamples (counts only, so fast)
 NET_N_PERM     <- 999
-NET_N_BREAKS <- c(-Inf, 56, Inf)
-NET_N_GROUPS <- c("Unlimed", "Limed")
+NET_N_BREAKS   <- c(-Inf, 28, 84, Inf)               # kg N ha-1
+NET_N_GROUPS   <- c("Low", "Intermediate", "High")
 
 net_core_types <- c("Hyphae Suppressed", "Hyphae Enriched")   # shared core labels
-metric_cols    <- c("density", "cross_density", "cross_frac", "amf_amf_frac",
-                    "diaz_diaz_frac", "positive_frac")
+amf_group_rank <- if (NET_LSU_RANK == "genus") "family" else "genus"   # AMF node colour
+metric_cols    <- c("n_present", "nif_present", "amf_present",   # turnover (total, by domain)
+                    "density", "cross_density",                   # pool: turnover + rewiring
+                    "density_present", "cross_density_present",   # present taxa: rewiring
+                    "cross_frac", "amf_amf_frac", "diaz_diaz_frac", "positive_frac")
 
 ## Helper functions
 
@@ -1809,27 +1831,32 @@ N_to_group <- function(N) {
 
 fill_na <- function(x) ifelse(is.na(x) | x == "", "Unclassified", x)
 
-prevalent <- function(m, groups, min_prev) {
-  keep <- sapply(split(seq_len(nrow(m)), groups),
-                 function(i) colMeans(m[i, , drop = FALSE] > 0) >= min_prev)
-  colnames(m)[apply(keep, 1, all)]
+# Shared taxon pool from all network cores: prevalence and mean relative
+# abundance (relative to the domain's total reads in each core)
+pool_taxa <- function(m, min_prev, min_abund) {
+  rel <- m / pmax(rowSums(m), 1)
+  colnames(m)[colMeans(m > 0) >= min_prev & colMeans(rel) >= min_abund]
 }
 clr <- function(m) { l <- log(m + 1); l - rowMeans(l) }
 
-# Taxa set, clr matrix and labels for one analysis (taxa prevalent in every network)
-make_data <- function(groups) {
-  nk <- prevalent(net_nif_counts, groups, NET_MIN_PREV)
-  lk <- prevalent(net_lsu_counts, groups, NET_MIN_PREV)
+# Taxon pool, clr matrix, presence matrix and labels (shared by all analyses)
+make_data <- function() {
+  nk <- pool_taxa(net_nif_counts, NET_MIN_PREV[["nif"]], NET_MIN_ABUND[["nif"]])
+  lk <- pool_taxa(net_lsu_counts, NET_MIN_PREV[["lsu"]], NET_MIN_ABUND[["lsu"]])
   nc <- clr(net_nif_counts[, nk, drop = FALSE]); colnames(nc) <- paste0("nif|", nk)
   lc <- clr(net_lsu_counts[, lk, drop = FALSE]); colnames(lc) <- paste0("lsu|", lk)
   X  <- cbind(nc, lc)
+  P  <- cbind(net_nif_counts[, nk, drop = FALSE], net_lsu_counts[, lk, drop = FALSE]) > 0
+  colnames(P) <- colnames(X)
   list(
     X      = X,
+    P      = P,                                        # presence (count > 0)
     source = setNames(c(rep("nif", length(nk)), rep("lsu", length(lk))), colnames(X)),
     label  = c(setNames(fill_na(net_nif_tax[nk, "Genus"]), colnames(nc)),
-               setNames(paste0(fill_na(net_lsu_tax[lk, "genus"]), " (", lk, ")"), colnames(lc))),
-    group  = c(setNames(fill_na(net_nif_tax[nk, "Class"]), colnames(nc)),   # diazotroph class
-               setNames(fill_na(net_lsu_tax[lk, "genus"]), colnames(lc)))   # AMF genus
+               setNames(if (NET_LSU_RANK == "genus") fill_na(net_lsu_tax[lk, "genus"]) else
+                 paste0(fill_na(net_lsu_tax[lk, "genus"]), " (", lk, ")"), colnames(lc))),
+    group  = c(setNames(fill_na(net_nif_tax[nk, "Class"]), colnames(nc)),     # diazotroph class
+               setNames(fill_na(net_lsu_tax[lk, amf_group_rank]), colnames(lc)))  # AMF family / genus
   )
 }
 
@@ -1871,12 +1898,17 @@ fit_mb <- function(X, lambda = NULL) {
   }, error = function(e) { message("Fit failed: ", conditionMessage(e)); NULL })
 }
 
-# One network per level of `net` (a factor with fixed levels)
+# One network per level of `net` (a factor with fixed levels), each fitted on
+# the pool taxa present in >= NET_MIN_CORES of that network's cores
 build_networks <- function(D, net, resid_vars, lambdas = NULL) {
   setNames(lapply(levels(net), function(k) {
-    idx <- which(net == k)
-    fit_mb(residualize(D$X[idx, , drop = FALSE], net_meta[idx, resid_vars, drop = FALSE]),
-           lambda = lambdas[[k]])
+    idx     <- which(net == k)
+    present <- colnames(D$X)[colSums(D$P[idx, , drop = FALSE]) >= NET_MIN_CORES]
+    fit     <- fit_mb(residualize(D$X[idx, present, drop = FALSE],
+                                  net_meta[idx, resid_vars, drop = FALSE]),
+                      lambda = lambdas[[k]])
+    if (!is.null(fit)) fit$present <- colnames(fit$adj)   # taxa actually fitted
+    fit
   }), levels(net))
 }
 
@@ -1919,6 +1951,9 @@ all_edge_tables <- function(fits, D, key_cols) {
   purrr::imap_dfr(fits, ~ edge_table(.x, .y, D)) %>% separate_keys(key_cols)
 }
 
+# Network metrics. Pool-based densities use every pool taxon as a possible node
+# (turnover + rewiring); *_present densities use only the taxa present in that
+# network (rewiring among co-occurring taxa).
 metrics_of <- function(fits, D, key_cols) {
   n_nif <- sum(D$source == "nif"); n_lsu <- sum(D$source == "lsu"); p <- n_nif + n_lsu
   purrr::imap_dfr(fits, function(f, k) {
@@ -1927,13 +1962,20 @@ metrics_of <- function(fits, D, key_cols) {
     ne <- if (is.null(e)) 0L else nrow(e)
     tp <- if (is.null(e)) character(0) else e$type
     st <- if (is.null(e)) logical(0)   else e$stable
+    pp <- length(f$present)
+    np <- sum(D$source[f$present] == "nif"); lp <- sum(D$source[f$present] == "lsu")
     tibble(network        = k,
+           n_present      = pp,
+           nif_present    = np,
+           amf_present    = lp,
            n_edges        = ne,
            cross_edges    = sum(tp == "AMF-diazotroph"),
            stable_edges   = sum(st, na.rm = TRUE),
            stable_cross   = sum(st & tp == "AMF-diazotroph", na.rm = TRUE),
            density        = ne / (p * (p - 1) / 2),
            cross_density  = sum(tp == "AMF-diazotroph") / (n_nif * n_lsu),
+           density_present       = ne / (pp * (pp - 1) / 2),
+           cross_density_present = if (np * lp) sum(tp == "AMF-diazotroph") / (np * lp) else NA_real_,
            cross_frac     = if (ne) mean(tp == "AMF-diazotroph") else NA_real_,
            amf_amf_frac   = if (ne) mean(tp == "AMF-AMF") else NA_real_,
            diaz_diaz_frac = if (ne) mean(tp == "Diazotroph-diazotroph") else NA_real_,
@@ -1941,6 +1983,14 @@ metrics_of <- function(fits, D, key_cols) {
            stability      = f$stability,
            path_end       = f$path_end)
   }) %>% separate_keys(key_cols)
+}
+
+# Present taxa, edges and mean neighbours per present taxon for each network
+network_size <- function(met) {
+  met %>%
+    dplyr::select(network, n_present, nif_present, amf_present,
+                  n_edges, stable_edges, stable_cross, path_end) %>%
+    mutate(mean_neighbours = 2 * n_edges / n_present)
 }
 
 ### Test statistics and permutation helpers
@@ -1996,6 +2046,93 @@ summarise_test <- function(obs, null, keys) {
               n_perm   = sum(!is.na(value)), .groups = "drop")
 }
 
+### Core-count check (N contrasts)
+
+count_cols <- c("n_present", "nif_present", "amf_present")
+
+# Pool taxa present (in >= NET_MIN_CORES cores) among a set of cores, by domain
+present_counts <- function(D, idx) {
+  pres <- colSums(D$P[idx, , drop = FALSE]) >= NET_MIN_CORES
+  tibble(n_present   = sum(pres),
+         nif_present = sum(pres & D$source == "nif"),
+         amf_present = sum(pres & D$source == "lsu"))
+}
+
+# Strata for the check: core types (B) or one pooled stratum (C)
+count_strata <- function(by, n) {
+  if (is.null(by)) factor(rep("Pooled", n)) else droplevels(factor(by))
+}
+
+# Present-taxa counts with every N group cut to the smallest group's core
+# count within its stratum, `reps` times
+subsample_counts <- function(D, groups, by = NULL, reps = NET_SUB_REPS, seed = SEED) {
+  strata <- count_strata(by, length(groups))
+  set.seed(seed)
+  purrr::map_dfr(seq_len(reps), function(r) {
+    purrr::map_dfr(levels(strata), function(st) {
+      in_st <- strata == st
+      n_min <- min(table(droplevels(groups[in_st])))
+      purrr::map_dfr(levels(groups), function(g) {
+        i <- which(in_st & groups == g)
+        if (length(i) > n_min) i <- sample(i, n_min)
+        bind_cols(tibble(rep = r, stratum = st, N_group = g, n_cores = n_min),
+                  present_counts(D, i))
+      })
+    })
+  }) %>%
+    mutate(N_group = factor(N_group, levels = levels(groups)))
+}
+
+# Each N group minus the first, per rep (or for the observed data)
+count_contrasts <- function(df) {
+  ref <- levels(df$N_group)[1]
+  df %>%
+    pivot_longer(all_of(count_cols), names_to = "metric") %>%
+    group_by(across(any_of(c("rep", "stratum", "metric")))) %>%
+    mutate(value = value - value[N_group == ref][1]) %>%
+    ungroup() %>%
+    filter(N_group != ref) %>%
+    mutate(contrast = paste(N_group, "-", ref))
+}
+
+# Observed (all cores) vs subsampled (equal cores) N contrasts: subsample
+# mean, 95% interval, and share of subsamples with the observed sign
+summarise_counts <- function(sub, D, groups, by = NULL) {
+  strata <- count_strata(by, length(groups))
+  obs <- purrr::map_dfr(levels(strata), function(st) {
+    purrr::map_dfr(levels(groups), function(g) {
+      bind_cols(tibble(stratum = st, N_group = g),
+                present_counts(D, which(strata == st & groups == g)))
+    })
+  }) %>%
+    mutate(N_group = factor(N_group, levels = levels(groups)))
+  
+  obs_c <- count_contrasts(obs) %>%
+    dplyr::select(stratum, metric, contrast, observed = value)
+  
+  count_contrasts(sub) %>%
+    left_join(obs_c, by = c("stratum", "metric", "contrast")) %>%
+    group_by(stratum, metric, contrast) %>%
+    summarise(n_cores   = dplyr::first(n_cores),
+              observed  = dplyr::first(observed),
+              sub_mean  = mean(value),
+              sub_lo    = quantile(value, 0.025),
+              sub_hi    = quantile(value, 0.975),
+              same_sign = mean(sign(value) == sign(observed)),
+              .groups   = "drop")
+}
+
+# Mean and 95% interval of present-taxa counts per N group at equal cores
+count_table <- function(sub) {
+  sub %>%
+    group_by(stratum, N_group, n_cores) %>%
+    summarise(across(all_of(count_cols),
+                     list(mean = ~ mean(.x),
+                          lo   = ~ quantile(.x, 0.025),
+                          hi   = ~ quantile(.x, 0.975))),
+              .groups = "drop")
+}
+
 ### Figures
 
 make_pal <- function(levels, base) {
@@ -2005,15 +2142,20 @@ make_pal <- function(levels, base) {
   setNames(cols, levels)
 }
 
-# Bipartite AMF-diazotroph network: AMF left, diazotrophs right, edge width =
-# stability, node colour = AMF genus / diazotroph class (amf_pal, diaz_pal)
-plot_cross_network <- function(edges, D, facet, title = NULL) {
+# Bipartite AMF-diazotroph network (all selected edges): AMF left, diazotrophs
+# right, edge width = stability (share of StARS subsamples selecting the edge),
+# edge colour = sign, node colour = AMF genus/family and diazotroph class
+# (amf_pal, diaz_pal). Nodes are unlabelled; the colour legends identify them.
+# legend_all = TRUE lists every colour group in the palettes, not just those
+# drawn, so one legend can be shared by several network figures.
+plot_cross_network <- function(edges, D, facet, title = NULL, node_size = 4.5,
+                               legend_all = FALSE) {
+  lim <- function(pal) if (legend_all) names(pal) else NULL       # limits: NULL = from data
+  brk <- function(pal) if (legend_all) names(pal) else waiver()    # breaks: waiver = default
   ce <- edges %>%
     filter(type == "AMF-diazotroph") %>%
     mutate(amf  = ifelse(D$source[from] == "lsu", from, to),
-           diaz = ifelse(D$source[from] == "lsu", to, from),
-           stable_lab = ifelse(stable %in% TRUE, paste0(">= ", NET_EDGE_FREQ),
-                               paste0("< ", NET_EDGE_FREQ)))
+           diaz = ifelse(D$source[from] == "lsu", to, from))
   if (nrow(ce) == 0) { message("No AMF-diazotroph edges to plot"); return(NULL) }
   
   facet_info <- ce %>% distinct(network, across(any_of(c("N_group", "core_type"))))
@@ -2027,45 +2169,37 @@ plot_cross_network <- function(edges, D, facet, title = NULL) {
     arrange(group, label, .by_group = TRUE) %>%
     mutate(y = if (n() == 1) 0 else seq(1, -1, length.out = n()),
            x = ifelse(domain == "AMF", 0, 1)) %>%
-    ungroup()
-  
-  # Label only nodes that take part in a stable edge
-  st <- ce %>% filter(stable %in% TRUE)
-  stable_nodes <- unique(c(paste(st$network, st$amf), paste(st$network, st$diaz)))
-  nodes <- nodes %>%
-    mutate(show_label = paste(network, node) %in% stable_nodes) %>%
+    ungroup() %>%
     left_join(facet_info, by = "network")
   
   seg <- ce %>%
-    left_join(nodes %>% dplyr::select(network, amf = node, x, y),            by = c("network", "amf")) %>%
+    left_join(nodes %>% dplyr::select(network, amf = node, x, y),                by = c("network", "amf")) %>%
     left_join(nodes %>% dplyr::select(network, diaz = node, xend = x, yend = y), by = c("network", "diaz"))
   
   ggplot() +
     geom_segment(data = seg,
                  aes(x = x, y = y, xend = xend, yend = yend,
-                     linewidth = freq, colour = sign, alpha = stable_lab)) +
+                     linewidth = freq, colour = sign),
+                 alpha = 0.8, lineend = "round") +
     scale_linewidth_continuous(name = "Edge stability", range = c(0.2, 2.5), limits = c(0, 1)) +
     scale_colour_manual(name = "Association",
                         values = c(Positive = "grey25", Negative = "firebrick3")) +
-    scale_alpha_manual(name = "Stability",
-                       values = setNames(c(0.9, 0.3), paste0(c(">= ", "< "), NET_EDGE_FREQ))) +
     geom_point(data = filter(nodes, domain == "AMF"),
-               aes(x = x, y = y, fill = group), shape = 24, size = 3.5, colour = "black") +
-    scale_fill_manual(name = "AMF genus", values = amf_pal) +
+               aes(x = x, y = y, fill = group), shape = 24, size = node_size, colour = "black") +
+    scale_fill_manual(name = paste("AMF", amf_group_rank), values = amf_pal,
+                      limits = lim(amf_pal), breaks = brk(amf_pal)) +
     ggnewscale::new_scale_fill() +
     geom_point(data = filter(nodes, domain == "Diazotroph"),
-               aes(x = x, y = y, fill = group), shape = 21, size = 3.5, colour = "black") +
-    scale_fill_manual(name = "Diazotroph class", values = diaz_pal) +
-    geom_text(data = filter(nodes, show_label, domain == "AMF"),
-              aes(x = x - 0.06, y = y, label = label), hjust = 1, size = 2.6) +
-    geom_text(data = filter(nodes, show_label, domain == "Diazotroph"),
-              aes(x = x + 0.06, y = y, label = label), hjust = 0, size = 2.6) +
+               aes(x = x, y = y, fill = group), shape = 21, size = node_size, colour = "black") +
+    scale_fill_manual(name = "Diazotroph class", values = diaz_pal,
+                      limits = lim(diaz_pal), breaks = brk(diaz_pal)) +
     geom_text(data = data.frame(x = c(0, 1), y = 1.12, lab = c("AMF", "Diazotrophs")),
               aes(x = x, y = y, label = lab), inherit.aes = FALSE,
               fontface = "bold", size = 3.5) +
     facet +
-    scale_x_continuous(limits = c(-1.1, 2.1)) +
+    scale_x_continuous(limits = c(-0.3, 1.3)) +
     scale_y_continuous(limits = c(-1.05, 1.18)) +
+    guides(colour = guide_legend(override.aes = list(linewidth = 1.2))) +
     labs(title = title) +
     theme_void(base_size = 12) +
     theme(strip.text      = element_text(size = 12, margin = margin(4, 4, 4, 4)),
@@ -2076,10 +2210,11 @@ plot_cross_network <- function(edges, D, facet, title = NULL) {
 
 
 ## Data
-# Raw counts: diazotroph genera (tax_glom) and AMF ASVs, soil cores only.
+# Raw counts, soil cores only: diazotroph genera and AMF genera (or ASVs).
 # The LSU outlier cores are dropped, as in the beta diversity and DESeq2 analyses.
 net_nif_ps <- glom_rank(soil_cores(nif), "Genus")
 net_lsu_ps <- soil_cores(lsu, drop = lsu_outliers)
+if (NET_LSU_RANK == "genus") net_lsu_ps <- glom_rank(net_lsu_ps, "genus")
 
 net_ids  <- base::intersect(sample_names(net_nif_ps), sample_names(net_lsu_ps))
 nif_mat  <- t(otu_counts(net_nif_ps))[net_ids, , drop = FALSE]   # samples x taxa
@@ -2088,8 +2223,13 @@ depth_ok <- rowSums(lsu_mat) >= lsu_depth & rowSums(nif_mat) >= nif_depth
 cat("Cores dropped for low depth:", sum(!depth_ok), "of", length(net_ids), "\n")
 net_ids  <- net_ids[depth_ok]
 
+# Lumped "Unclassified" genera are removed; unclassified ASVs are kept (distinct variants)
 net_nif_counts <- nif_mat[net_ids, classified(net_nif_ps, "Genus"), drop = FALSE]
-net_lsu_counts <- lsu_mat[net_ids, , drop = FALSE]   # unclassified ASVs kept (distinct variants)
+net_lsu_counts <- if (NET_LSU_RANK == "genus") {
+  lsu_mat[net_ids, classified(net_lsu_ps, "genus"), drop = FALSE]
+} else {
+  lsu_mat[net_ids, , drop = FALSE]
+}
 
 net_meta <- get_meta(net_nif_ps)[net_ids, ]          # shared labels, plot and pair
 net_meta$N_group <- N_to_group(net_meta$N_treatment)
@@ -2100,6 +2240,10 @@ check_pairs(net_meta)                                # unpaired cores stay put i
 
 net_nif_tax <- as.data.frame(as(tax_table(net_nif_ps), "matrix"))
 net_lsu_tax <- as.data.frame(as(tax_table(net_lsu_ps), "matrix"))
+
+# One taxon pool for every network and analysis
+net_D <- make_data()
+c(diazotroph_genera = sum(net_D$source == "nif"), AMF_taxa = sum(net_D$source == "lsu"))
 
 
 ## Permutation sets (shared across analyses)
@@ -2118,41 +2262,37 @@ permute_N <- function(p) N_to_group(net_plots$N_treatment[p])[idx_plot]
 
 
 ## A. Core type (all N)
-D_A <- make_data(net_meta$core_type)
-c(diazotroph_genera = sum(D_A$source == "nif"), AMF_ASVs = sum(D_A$source == "lsu"))
-
 set.seed(SEED)
-fits_A  <- build_networks(D_A, net_core(net_meta$core_type), "plot")
+fits_A  <- build_networks(net_D, net_core(net_meta$core_type), "plot")
 lam_A   <- purrr::map(fits_A, "lambda")
-met_A   <- metrics_of(fits_A, D_A, "core_type")
-edges_A <- all_edge_tables(fits_A, D_A, "core_type")
+met_A   <- metrics_of(fits_A, net_D, "core_type")
+edges_A <- all_edge_tables(fits_A, net_D, "core_type")
 met_A
+network_size(met_A)   # mean neighbours should stay well below ~ n / log(taxa)
 
 if (NET_RUN_TESTS) {
   null_A <- run_null(perms_core, function(p) net_core(net_meta$core_type[p]),
-                     D_A, "plot", lam_A, "core_type", core_diff)
+                     net_D, "plot", lam_A, "core_type", core_diff)
   test_A <- summarise_test(core_diff(met_A), null_A, c("metric", "contrast"))
   test_A
 }
 
 
 ## B. N group x core type
-D_B <- make_data(net_Ncore(net_meta$N_group, net_meta$core_type))
-c(diazotroph_genera = sum(D_B$source == "nif"), AMF_ASVs = sum(D_B$source == "lsu"))
-
 set.seed(SEED)
-fits_B  <- build_networks(D_B, net_Ncore(net_meta$N_group, net_meta$core_type), "plot")
+fits_B  <- build_networks(net_D, net_Ncore(net_meta$N_group, net_meta$core_type), "plot")
 lam_B   <- purrr::map(fits_B, "lambda")
-met_B   <- metrics_of(fits_B, D_B, c("N_group", "core_type"))
-edges_B <- all_edge_tables(fits_B, D_B, c("N_group", "core_type"))
+met_B   <- metrics_of(fits_B, net_D, c("N_group", "core_type"))
+edges_B <- all_edge_tables(fits_B, net_D, c("N_group", "core_type"))
 met_B
+network_size(met_B)   # mean neighbours should stay well below ~ n / log(taxa)
 
 if (NET_RUN_TESTS) {
   # Core type within each N group
   stat_B_core <- function(m) core_diff(m, by = "N_group")
   null_B_core <- run_null(perms_core,
                           function(p) net_Ncore(net_meta$N_group, net_meta$core_type[p]),
-                          D_B, "plot", lam_B, c("N_group", "core_type"), stat_B_core)
+                          net_D, "plot", lam_B, c("N_group", "core_type"), stat_B_core)
   test_B_core <- summarise_test(stat_B_core(met_B), null_B_core,
                                 c("N_group", "metric", "contrast"))
   
@@ -2160,7 +2300,7 @@ if (NET_RUN_TESTS) {
   stat_B_N <- function(m) bind_rows(n_contrast(m, by = "core_type"), nx_core(m))
   null_B_N <- run_null(perms_N,
                        function(p) net_Ncore(permute_N(p), net_meta$core_type),
-                       D_B, "plot", lam_B, c("N_group", "core_type"), stat_B_N)
+                       net_D, "plot", lam_B, c("N_group", "core_type"), stat_B_N)
   test_B_N <- summarise_test(stat_B_N(met_B), null_B_N, c("core_type", "metric", "contrast"))
   
   test_B_core
@@ -2169,21 +2309,43 @@ if (NET_RUN_TESTS) {
 
 
 ## C. N group (core types pooled)
-D_C <- make_data(net_meta$N_group)
-c(diazotroph_genera = sum(D_C$source == "nif"), AMF_ASVs = sum(D_C$source == "lsu"))
-
 set.seed(SEED)
-fits_C  <- build_networks(D_C, net_N(net_meta$N_group), c("plot", "core_type"))
+fits_C  <- build_networks(net_D, net_N(net_meta$N_group), c("plot", "core_type"))
 lam_C   <- purrr::map(fits_C, "lambda")
-met_C   <- metrics_of(fits_C, D_C, "N_group")
-edges_C <- all_edge_tables(fits_C, D_C, "N_group")
+met_C   <- metrics_of(fits_C, net_D, "N_group")
+edges_C <- all_edge_tables(fits_C, net_D, "N_group")
 met_C
+network_size(met_C)   # mean neighbours should stay well below ~ n / log(taxa)
 
 if (NET_RUN_TESTS) {
   null_C <- run_null(perms_N, function(p) net_N(permute_N(p)),
-                     D_C, c("plot", "core_type"), lam_C, "N_group", n_contrast)
+                     net_D, c("plot", "core_type"), lam_C, "N_group", n_contrast)
   test_C <- summarise_test(n_contrast(met_C), null_C, c("metric", "contrast"))
   test_C
+}
+
+
+## Core-count check: N contrasts in present taxa
+# Within each core type (B) and pooled (C), every N group is cut to the
+# smallest group's core count. Contrasts with same_sign near 1 and an interval
+# excluding 0 hold at equal sampling effort.
+if (NET_RUN_SUBSAMPLE) {
+  sub_B_N <- subsample_counts(net_D, net_meta$N_group, by = net_meta$core_type)
+  sub_C_N <- subsample_counts(net_D, net_meta$N_group)
+  
+  net_subsample <- bind_rows(
+    `B: N within core type` = summarise_counts(sub_B_N, net_D, net_meta$N_group,
+                                               by = net_meta$core_type),
+    `C: N group, pooled`    = summarise_counts(sub_C_N, net_D, net_meta$N_group),
+    .id = "analysis")
+  
+  net_subsample_groups <- bind_rows(
+    `B: N within core type` = count_table(sub_B_N),
+    `C: N group, pooled`    = count_table(sub_C_N),
+    .id = "analysis")
+  
+  net_subsample
+  net_subsample_groups
 }
 
 
@@ -2196,15 +2358,19 @@ net_metrics <- bind_rows(`A: core type`       = met_A,
 net_edges   <- bind_rows(`A: core type`       = edges_A,
                          `B: N group x core`  = edges_B,
                          `C: N group, pooled` = edges_C, .id = "analysis")
-write.csv(net_metrics, "Network_results//network_metrics.csv", row.names = FALSE)
-write.csv(net_edges,   "Network_results//network_edges.csv",   row.names = FALSE)
+write.csv(net_metrics, "Tables/network_metrics.csv", row.names = FALSE)
+write.csv(net_edges,   "Tables/network_edges.csv",   row.names = FALSE)
 
 if (NET_RUN_TESTS) {
   net_tests <- bind_rows(`A: core type`                = test_A,
                          `B: core type within N group` = test_B_core,
                          `B: N group and N x core`     = test_B_N,
                          `C: N group, pooled`          = test_C, .id = "analysis")
-  write.csv(net_tests, "Network_results/network_tests.csv", row.names = FALSE)
+  write.csv(net_tests, "Tables/network_tests.csv", row.names = FALSE)
+}
+if (NET_RUN_SUBSAMPLE) {
+  write.csv(net_subsample,        "Tables/network_subsample_contrasts.csv", row.names = FALSE)
+  write.csv(net_subsample_groups, "Tables/network_subsample_groups.csv",    row.names = FALSE)
 }
 
 # Stable AMF-diazotroph edges, all analyses
@@ -2215,20 +2381,525 @@ net_edges %>%
 
 
 ## Bipartite AMF-diazotroph network figures
-all_D    <- list(D_A, D_B, D_C)
-amf_pal  <- make_pal(unlist(lapply(all_D, function(D) D$group[D$source == "lsu"])),
-                     ggsci::pal_npg()(10))
-diaz_pal <- make_pal(unlist(lapply(all_D, function(D) D$group[D$source == "nif"])),
-                     ggsci::pal_observable()(10))
+amf_pal  <- make_pal(net_D$group[net_D$source == "lsu"], ggsci::pal_npg()(10))
+diaz_pal <- make_pal(net_D$group[net_D$source == "nif"], ggsci::pal_observable()(10))
 
-net_fig_A <- plot_cross_network(edges_A, D_A, facet_wrap(~ core_type, nrow = 1),
+net_fig_A <- plot_cross_network(edges_A, net_D, facet_wrap(~ core_type, nrow = 1),
                                 "A. Core type (all N levels)")
-net_fig_B <- plot_cross_network(edges_B, D_B, facet_grid(core_type ~ N_group),
+net_fig_B <- plot_cross_network(edges_B, net_D, facet_grid(core_type ~ N_group),
                                 "B. N group x core type")
-net_fig_C <- plot_cross_network(edges_C, D_C, facet_wrap(~ N_group, nrow = 1),
+net_fig_C <- plot_cross_network(edges_C, net_D, facet_wrap(~ N_group, nrow = 1),
                                 "C. N group (core types pooled)")
 net_fig_A; net_fig_B; net_fig_C
 
-if (!is.null(net_fig_A)) ggsave("Figures/network_A_core_type.png", net_fig_A, width = 11, height = 7,  dpi = 600)
-if (!is.null(net_fig_B)) ggsave("Figures/network_B_N_by_core.png", net_fig_B, width = 16, height = 10, dpi = 600)
-if (!is.null(net_fig_C)) ggsave("Figures/network_C_N_pooled.png",  net_fig_C, width = 16, height = 7,  dpi = 600)
+# Saved as Figure 5A (analysis B) and Figure S5 (analyses A and C) at the end of the script
+
+
+## ============================== Network-linked diazotrophs and FLNF =======================================
+## Do diazotroph genera in stable, positive AMF-diazotroph associations predict
+## free-living N fixation? One genus set per N group x core type network.
+##   1. For each network in analysis B, the diazotroph genera with >= 1 positive,
+##      stable edge (selected in >= NET_EDGE_FREQ of StARS subsamples)
+##   2. Each set's summed relative abundance in every core: all nifH OTUs in
+##      those genera, as a share of the core's rarefied nifH reads (genus level)
+##   3. One model per set: FLNF ~ abundance + core_type * N_treatment + block,
+##      random plot and pair, log(FLNF). Kenward-Roger F tests (lmer), with a
+##      Gamma(log) GLMM (glmmTMB) as a check; BH correction across the sets.
+##      N and core type are in every model, so each test asks whether the set
+##      predicts FLNF beyond the treatment effects.
+##   4. Within-network test: each set only in its own network's cores, overall
+##      and within plots (abundance centred on the plot mean), matching how the
+##      networks were inferred.
+## Sets share genera, so their abundances are correlated: they are tested in
+## separate models, not together. Genera are chosen by co-occurrence with AMF,
+## not by FLNF, so the selection does not use the response.
+
+LINK_EDGE_TYPES <- "AMF-diazotroph"   # add "Diazotroph-diazotroph" to include those edges
+
+## Network-linked genera, per network
+link_genera <- edges_B %>%
+  filter(type %in% LINK_EDGE_TYPES, sign == "Positive", stable %in% TRUE) %>%
+  dplyr::select(network, N_group, core_type, from, to) %>%
+  pivot_longer(c(from, to), values_to = "node") %>%
+  filter(startsWith(node, "nif|")) %>%
+  mutate(Genus = net_nif_tax[sub("^nif\\|", "", node), "Genus"],
+         set   = paste(N_group, sub("Hyphae ", "", core_type), sep = "_")) %>%   # e.g. Low_Suppressed
+  distinct(set, network, N_group, core_type, Genus)
+
+link_sets <- split(link_genera$Genus, link_genera$set)
+lengths(link_sets)                                   # genera per network
+
+# Which genera are shared between networks
+link_membership <- link_genera %>%
+  mutate(present = 1L) %>%
+  dplyr::select(Genus, set, present) %>%
+  pivot_wider(names_from = set, values_from = present, values_fill = 0L)
+link_membership
+
+## Relative abundance of each set in every core (genus level, rarefied nifH)
+nif_rfy_tax <- as.data.frame(as(tax_table(nif_rfy), "matrix"))
+link_otus   <- lapply(link_sets, function(g) rownames(nif_rfy_tax)[nif_rfy_tax$Genus %in% g])
+
+link_df   <- otu_group_data(nif_rfy, link_otus)      # core level, FLNF > 0
+link_vars <- attr(link_df, "groups")                 # sets with variation across cores
+setdiff(names(link_sets), link_vars)                 # sets dropped (no variation)
+
+# Correlation among sets and with N rate
+round(cor(link_df[link_vars], use = "pairwise.complete.obs", method = "spearman"), 2)
+sapply(link_df[link_vars], function(x)
+  cor(x, as.numeric(as.character(link_df$N_treatment)), method = "spearman", use = "complete.obs"))
+
+## One model per set
+link_fits <- set_names(link_vars) %>%
+  purrr::map(~ fit_models(link_df, "n_fixation", covariates = .x, log_response = TRUE))
+
+link_tests <- purrr::imap_dfr(link_fits, function(fit, v) {
+  kr    <- as.data.frame(fit$anova_t2)[v, ]
+  glmm  <- as.data.frame(car::Anova(fit$glmm, type = 2))[v, ]
+  slope <- emtrends(fit$lmer, ~ 1, var = v, lmer.df = "kenward-roger") %>%
+    summary(infer = TRUE) %>%
+    as.data.frame()
+  tibble(set              = v,
+         n_genera         = length(link_sets[[v]]),
+         F                = kr$`F value`,
+         NumDF            = kr$NumDF,
+         DenDF            = kr$DenDF,
+         p_KR             = kr$`Pr(>F)`,
+         p_GLMM           = glmm$`Pr(>Chisq)`,
+         fold_per_10pp    = exp(0.1 * slope[[paste0(v, ".trend")]]),   # FLNF fold change per +10 pp
+         fold_lo          = exp(0.1 * slope$lower.CL),
+         fold_hi          = exp(0.1 * slope$upper.CL))
+}) %>%
+  mutate(p_BH = p.adjust(p_KR, method = "BH"), .after = p_KR)
+link_tests
+
+# Residual checks for each set's model
+purrr::walk(link_fits, check_fit)
+
+# Sensitivity: does a set's relationship differ between core types?
+# fit_models(link_df, "n_fixation", covariates = c("Low_Enriched", "Low_Enriched:core_type"),
+#            log_response = TRUE)$anova_t2
+
+## Figure: cores + model-adjusted trend for each set (averaged over core type, N, block)
+link_pred <- purrr::imap_dfr(link_fits, function(fit, v) {
+  grid <- seq(min(fit$data[[v]]), max(fit$data[[v]]), length.out = 50)
+  emmeans(fit$lmer, as.formula(paste("~", v)), at = setNames(list(grid), v),
+          type = "response", lmer.df = "kenward-roger") %>%
+    as.data.frame() %>%
+    dplyr::rename(estimate = any_of(c("response", "emmean")), abund = all_of(v)) %>%
+    mutate(set = v)
+})
+
+link_points <- link_df %>%
+  filter(!is.na(n_fixation)) %>%
+  dplyr::select(n_fixation, N_treatment, core_type, all_of(link_vars)) %>%
+  pivot_longer(all_of(link_vars), names_to = "set", values_to = "abund")
+
+# Facet order (Low -> High N; suppressed row first) and readable labels,
+# e.g. "Low_Suppressed" -> "Low-N: Hyphae Suppressed"
+set_levels <- as.vector(t(outer(c("Suppressed", "Enriched"), NET_N_GROUPS,
+                                function(core, N) paste(N, core, sep = "_"))))
+set_names_pretty <- setNames(sub("^(.*)_(.*)$", "\\1-N: Hyphae \\2", set_levels), set_levels)
+set_labels <- function(df) {
+  lev <- base::intersect(set_levels, unique(df$set))
+  df %>% mutate(set = factor(set, levels = lev, labels = set_names_pretty[lev]))
+}
+
+link_plot <- ggplot() +
+  geom_ribbon(data = set_labels(link_pred), aes(x = abund, ymin = lower.CL, ymax = upper.CL),
+              fill = "grey80", alpha = 0.6) +
+  geom_line(data = set_labels(link_pred), aes(x = abund, y = estimate), linewidth = 1.1) +
+  geom_point(data = set_labels(link_points),
+             aes(x = abund, y = n_fixation, fill = N_treatment, shape = core_type),
+             size = 2.4, alpha = 0.85, colour = "black") +
+  facet_wrap(~ set, scales = "free_x", nrow = 2) +
+  scale_y_log10() +
+  scale_fill_viridis_d(name = "N Treatment", labels = N_treatment_labels, drop = FALSE) +
+  scale_shape_manual(name = "Core Type", values = c(21, 24)) +
+  guides(fill = guide_legend(override.aes = list(shape = 21))) +
+  labs(x = "Relative abundance of the network's linked diazotroph genera",
+       y = expression(FLNF ~ ("µg" ~ N ~ g^-1 ~ dry ~ soil ~ day^-1))) +
+  theme_bw() +
+  theme(axis.text    = element_text(size = 12, colour = "black"),
+        axis.title   = element_text(size = 16),
+        strip.text   = element_text(size = 14),
+        legend.text  = element_text(size = 14),
+        legend.title = element_text(size = 16))
+link_plot
+
+
+## Within-network test: each set only in the cores of its own network
+# Matches how the networks were inferred: the same cores, one core type and two
+# N levels. Model: log(FLNF) ~ abundance + N_treatment + block + (1 | plot).
+# The within-plot version uses abundance centred on its plot mean (plot mean as
+# a separate term), mirroring the networks' removal of plot means: do cores with
+# more of these genera than their plot-mates fix more N? ~14-20 cores and 8
+# plots per network, so power is limited.
+fit_within_network <- function(df, v) {
+  dat <- df %>%
+    filter(!is.na(n_fixation), !is.na(.data[[v]])) %>%
+    group_by(plot) %>%
+    mutate(abund_plot   = mean(.data[[v]]),
+           abund_within = .data[[v]] - abund_plot) %>%
+    ungroup() %>%
+    droplevels()
+  fixed <- "N_treatment + treatment_block + (1 | plot)"
+  list(data   = dat,
+       lmer   = lmerTest::lmer(as.formula(paste("log(n_fixation) ~", v, "+", fixed)), data = dat),
+       within = lmerTest::lmer(as.formula(paste("log(n_fixation) ~ abund_within + abund_plot +", fixed)),
+                               data = dat))
+}
+
+net_cores <- function(set) {          # cores of the network a set came from
+  key <- link_genera %>% filter(set == !!set) %>% distinct(N_group, core_type)
+  rownames(net_meta)[as.character(net_meta$N_group)   == as.character(key$N_group) &
+                       as.character(net_meta$core_type) == as.character(key$core_type)]
+}
+
+link_within_fits <- set_names(link_vars) %>%
+  purrr::map(~ fit_within_network(filter(link_df, Site %in% net_cores(.x)), .x))
+
+link_within_tests <- purrr::imap_dfr(link_within_fits, function(fit, v) {
+  kr  <- as.data.frame(anova(fit$lmer,   type = 2, ddf = "Kenward-Roger"))[v, ]
+  krw <- as.data.frame(anova(fit$within, type = 2, ddf = "Kenward-Roger"))["abund_within", ]
+  b   <- summary(fit$lmer)$coefficients[v, "Estimate"]
+  tibble(set            = v,
+         n_cores        = nrow(fit$data),
+         n_plots        = dplyr::n_distinct(fit$data$plot),
+         abund_sd       = sd(fit$data[[v]]),
+         F              = kr$`F value`,
+         DenDF          = kr$DenDF,
+         p_KR           = kr$`Pr(>F)`,
+         fold_per_sd    = exp(b * sd(fit$data[[v]])),   # FLNF fold change per 1 SD of abundance
+         F_within       = krw$`F value`,
+         p_within       = krw$`Pr(>F)`)
+}) %>%
+  mutate(p_BH        = p.adjust(p_KR,     method = "BH"), .after = p_KR) %>%
+  mutate(p_within_BH = p.adjust(p_within, method = "BH"))
+link_within_tests
+
+# Figure: each network's own cores with the fitted trend (N and block averaged)
+link_within_pred <- purrr::imap_dfr(link_within_fits, function(fit, v) {
+  grid <- seq(min(fit$data[[v]]), max(fit$data[[v]]), length.out = 50)
+  emmeans(fit$lmer, as.formula(paste("~", v)), at = setNames(list(grid), v),
+          type = "response", lmer.df = "kenward-roger") %>%
+    as.data.frame() %>%
+    dplyr::rename(estimate = any_of(c("response", "emmean")), abund = all_of(v)) %>%
+    mutate(set = v)
+})
+link_within_points <- purrr::imap_dfr(link_within_fits, function(fit, v) {
+  fit$data %>% transmute(set = v, abund = .data[[v]], n_fixation,
+                         N_treatment = as.character(N_treatment))
+}) %>%
+  mutate(N_treatment = factor(N_treatment, levels = names(N_labels)))   # keep 0 -> 196 order and colours
+
+link_within_plot <- ggplot() +
+  geom_ribbon(data = set_labels(link_within_pred), aes(x = abund, ymin = lower.CL, ymax = upper.CL),
+              fill = "grey80", alpha = 0.6) +
+  geom_line(data = set_labels(link_within_pred), aes(x = abund, y = estimate), linewidth = 1.1) +
+  geom_point(data = set_labels(link_within_points),
+             aes(x = abund, y = n_fixation, fill = N_treatment),
+             shape = 21, size = 2.8, alpha = 0.9, colour = "black") +
+  facet_wrap(~ set, scales = "free_x", nrow = 2) +
+  scale_y_log10() +
+  scale_fill_viridis_d(name = "N Treatment", labels = N_treatment_labels, drop = FALSE) +
+  labs(x = "Relative abundance of the network's linked diazotroph genera (network cores only)",
+       y = expression(FLNF ~ ("µg" ~ N ~ g^-1 ~ dry ~ soil ~ day^-1))) +
+  theme_bw() +
+  theme(axis.text    = element_text(size = 12, colour = "black"),
+        axis.title   = element_text(size = 16),
+        strip.text   = element_text(size = 14),
+        legend.text  = element_text(size = 14),
+        legend.title = element_text(size = 16))
+link_within_plot
+
+write.csv(link_genera, "Tables/network_linked_genera.csv",       row.names = FALSE)
+write.csv(link_tests,  "Tables/network_linked_genera_FLNF.csv",  row.names = FALSE)
+write.csv(link_within_tests, "Tables/network_linked_genera_FLNF_within_network.csv", row.names = FALSE)
+# Saved as Figure S6 (A: all cores, B: network cores) at the end of the script
+
+
+## ============================== Manuscript figures and tables =======================================
+## Assembled here because they combine results from several sections.
+## Saved earlier in the script:
+##   Figure 1   Figures/Figure_1.png    alpha diversity, FLNF, ERH
+##   Figure 2   Figures/Figure_2.png    beta diversity (NMDS + plot-level vectors)
+##   Figure 4   Figures/Figure_4.png    DESeq2 N responders, nifH and LSU
+##   Figure S1  Figures/Figure_S1.png   rarefaction curves
+##   Figure S2  Figures/Figure_S2.png   soil chemistry model estimates
+##   Figure S3  Figures/Figure_S3.png   AMF core-type DESeq2
+##   Figure S4  Figures/Figure_S4.png   DESeq2 N-response outliers vs FLNF
+## Built here: Figures 3 and 5, Figures S5 and S6, Tables 1 and 2,
+## Tables S2 (soil chemistry models) and S3 (envfit vectors).
+## Table S1 (primers / PCR conditions) is in the manuscript, not generated here.
+## Figure 3B and Table 1 need the permutation tests (NET_RUN_TESTS = TRUE);
+## Figure 5B and the Table 1 subsample columns need NET_RUN_SUBSAMPLE = TRUE.
+
+ms_theme <- theme_bw() +
+  theme(axis.text    = element_text(size = 13, colour = "black"),
+        axis.title   = element_text(size = 15),
+        strip.text   = element_text(size = 13),
+        legend.text  = element_text(size = 13),
+        legend.title = element_text(size = 15))
+
+## Figure 3: diazotroph core-type DESeq2 (A), core-type networks (B) and the
+## cross-domain share vs its permutation null (C)
+if (NET_RUN_TESTS) {
+  cross_null <- null_A %>% filter(metric == "cross_frac")
+  cross_obs  <- test_A %>% filter(metric == "cross_frac")
+  obs_frac   <- met_A %>% dplyr::select(core_type, cross_frac)
+  
+  fig3_null <- ggplot(cross_null, aes(x = value)) +
+    geom_histogram(bins = 40, fill = "grey75", colour = "grey40", linewidth = 0.2) +
+    geom_vline(xintercept = cross_obs$observed, colour = "firebrick3", linewidth = 1.2) +
+    annotate("label", x = cross_obs$observed, y = Inf, vjust = 1.3, hjust = 1.05, size = 4.2,
+             label = sprintf("Observed = %.3f\np = %.3f", cross_obs$observed, cross_obs$p_value)) +
+    labs(x = "Difference in AMF-diazotroph share of edges\n(Hyphae Enriched - Hyphae Suppressed)",
+         y = "Permutations",
+         caption = sprintf("Observed share: Suppressed %.2f, Enriched %.2f",
+                           obs_frac$cross_frac[obs_frac$core_type == "Hyphae Suppressed"],
+                           obs_frac$cross_frac[obs_frac$core_type == "Hyphae Enriched"])) +
+    ms_theme
+  
+  # Core-type networks (analysis A), no legends: strips give the number and share
+  # of AMF-diazotroph edges. Edge width = stability; grey = positive, red = negative.
+  fig3_strips <- met_A %>%
+    mutate(lab = sprintf("%s\n%d AMF-diazotroph edges (%.0f%%)",
+                         core_type, cross_edges, 100 * cross_frac))
+  fig3_net <- plot_cross_network(
+    edges_A, net_D,
+    facet_wrap(~ core_type, nrow = 1,
+               labeller = as_labeller(setNames(fig3_strips$lab,
+                                               as.character(fig3_strips$core_type))))
+  ) + theme(legend.position = "none",
+            plot.margin = margin(t = 5, r = 5, b = 15, l = 5))
+  
+  fig3_null <- fig3_null + theme(plot.margin = margin(t = 25, r = 10, b = 5, l = 20))
+  
+  fig3 <- plot_grid(
+    deseq_core_nif,
+    plot_grid(fig3_net, fig3_null, ncol = 1, rel_heights = c(1.3, 1),
+              labels = c("B", "C"), label_fontface = "bold", label_size = 16),
+    ncol = 2, rel_widths = c(1.4, 1),
+    labels = c("A", ""), label_fontface = "bold", label_size = 16
+  )
+  fig3
+  ggsave("Figures/Figure_3.png", plot = fig3, dpi = 600, width = 20, height = 12, bg = "white")
+}
+
+## Figure 5: N effects on networks
+# A: analysis B networks; B: present taxa by domain at equal core counts;
+# C: AMF-diazotroph edge counts and connectance among present taxa across N
+fig5_A <- net_fig_B + labs(title = NULL)
+
+if (NET_RUN_SUBSAMPLE) {
+  fig5_counts <- net_subsample_groups %>%
+    filter(analysis == "B: N within core type") %>%
+    transmute(core_type = factor(stratum, levels = net_core_types),
+              N_group   = factor(N_group, levels = NET_N_GROUPS),
+              n_cores,
+              AMF_mean = amf_present_mean, AMF_lo = amf_present_lo, AMF_hi = amf_present_hi,
+              Diaz_mean = nif_present_mean, Diaz_lo = nif_present_lo, Diaz_hi = nif_present_hi) %>%
+    pivot_longer(-c(core_type, N_group, n_cores),
+                 names_to = c("domain", ".value"), names_sep = "_") %>%
+    mutate(domain = factor(ifelse(domain == "AMF", "AMF ASVs", "Diazotroph genera"),
+                           levels = c("AMF ASVs", "Diazotroph genera")))
+  
+  fig5_B <- ggplot(fig5_counts, aes(x = N_group, y = mean, colour = core_type, group = core_type)) +
+    geom_line(linewidth = 1.1, position = position_dodge(width = 0.3)) +
+    geom_errorbar(aes(ymin = lo, ymax = hi), width = 0.15, linewidth = 0.8,
+                  position = position_dodge(width = 0.3)) +
+    geom_point(aes(fill = core_type), shape = 21, colour = "black", size = 4,
+               position = position_dodge(width = 0.3)) +
+    facet_wrap(~ domain, scales = "free_y") +
+    scale_colour_npg(name = "Core Type") +
+    scale_fill_npg(name = "Core Type") +
+    labs(x = "N group", y = "Taxa present\n(equal cores per N group; mean, 95% interval)") +
+    ms_theme
+} else {
+  fig5_B <- NULL
+}
+
+# C: AMF-diazotroph associations across N within core types, two facets:
+#    top    - number of AMF-diazotroph edges (turnover + rewiring; tested as the
+#             pool-based cross_density, which is the count / a fixed constant)
+#    bottom - AMF-diazotroph connectance among the taxa present
+#             (edges / (AMF present x diazotrophs present); rewiring only)
+# Labels give the permutation p-value range for the N contrasts in each core type.
+fig5_C_measures <- c(cross_edges           = "AMF-diazotroph edges",
+                     cross_density_present = "Connectance among taxa present")
+fig5_C_tested   <- c(cross_edges = "cross_density", cross_density_present = "cross_density_present")
+
+fig5_C_df <- met_B %>%
+  dplyr::select(N_group, core_type, all_of(names(fig5_C_measures))) %>%
+  pivot_longer(all_of(names(fig5_C_measures)), names_to = "measure", values_to = "value") %>%
+  mutate(measure = factor(fig5_C_measures[measure], levels = fig5_C_measures))
+
+fig5_C_lab <- if (NET_RUN_TESTS) {
+  net_tests %>%
+    filter(analysis == "B: N group and N x core", !is.na(core_type),
+           metric %in% fig5_C_tested) %>%
+    mutate(measure = fig5_C_measures[names(fig5_C_tested)[match(metric, fig5_C_tested)]],
+           core    = sub("Hyphae ", "", core_type)) %>%
+    group_by(measure, core) %>%
+    summarise(p_lo = min(p_value), p_hi = max(p_value), .groups = "drop") %>%
+    mutate(txt = ifelse(sprintf("%.3f", p_lo) == sprintf("%.3f", p_hi),
+                        sprintf("%s: p = %.3f", core, p_lo),
+                        sprintf("%s: p = %.3f-%.3f", core, p_lo, p_hi))) %>%
+    group_by(measure) %>%
+    summarise(label = paste(c("N effect", rev(sort(txt))), collapse = "\n"), .groups = "drop") %>%
+    mutate(measure = factor(measure, levels = fig5_C_measures))
+} else NULL
+
+fig5_C <- ggplot(fig5_C_df, aes(x = N_group, y = value, colour = core_type, group = core_type)) +
+  geom_line(linewidth = 1.1) +
+  geom_point(aes(fill = core_type), shape = 21, colour = "black", size = 4) +
+  facet_wrap(~ measure, ncol = 1, scales = "free_y") +
+  scale_colour_npg(name = "Core Type") +
+  scale_fill_npg(name = "Core Type") +
+  scale_y_continuous(expand = expansion(mult = c(0.05, 0.35))) +   # room for the labels
+  expand_limits(y = 0) +
+  labs(x = "N group", y = NULL) +
+  ms_theme
+if (!is.null(fig5_C_lab)) {
+  fig5_C <- fig5_C + geom_text(data = fig5_C_lab, aes(x = 3.4, y = Inf, label = label),
+                               inherit.aes = FALSE, hjust = 1, vjust = 1.2, size = 3.6)
+}
+
+fig5_BC <- if (!is.null(fig5_B)) {
+  plot_grid(fig5_B + theme(legend.position = "none"),
+            fig5_C + theme(legend.position = "none"),
+            cowplot::get_legend(fig5_C),
+            ncol = 3, rel_widths = c(1.6, 1, 0.5),
+            labels = c("B", "C", ""), label_fontface = "bold", label_size = 16)
+} else {
+  plot_grid(fig5_C, labels = "C", label_fontface = "bold", label_size = 16)
+}
+fig5 <- plot_grid(fig5_A, fig5_BC, ncol = 1, rel_heights = c(1.5, 1),
+                  labels = c("A", ""), label_fontface = "bold", label_size = 16)
+fig5
+ggsave("Figures/Figure_5.png", plot = fig5, dpi = 600, width = 16, height = 16, bg = "white")
+
+## Figure S5: networks from analysis A (core type) and C (N group, pooled)
+# One shared legend listing every AMF and diazotroph group in either panel
+figS5_A <- plot_cross_network(edges_A, net_D, facet_wrap(~ core_type, nrow = 1), legend_all = TRUE)
+figS5_C <- plot_cross_network(edges_C, net_D, facet_wrap(~ N_group,   nrow = 1), legend_all = TRUE)
+
+figS5 <- plot_grid(
+  plot_grid(figS5_A + theme(legend.position = "none"),
+            figS5_C + theme(legend.position = "none"),
+            ncol = 1, labels = c("A", "B"), label_fontface = "bold", label_size = 16),
+  cowplot::get_legend(figS5_A),
+  ncol = 2, rel_widths = c(1, 0.22)
+)
+figS5
+ggsave("Figures/Figure_S5.png", plot = figS5, dpi = 600, width = 14, height = 16, bg = "white")
+
+## Figure S6: network-linked diazotroph genera vs FLNF (A: all cores, B: network cores)
+figS6 <- plot_grid(link_plot, link_within_plot, ncol = 1,
+                   labels = c("A", "B"), label_fontface = "bold", label_size = 16)
+figS6
+ggsave("Figures/Figure_S6.png", plot = figS6, dpi = 600, width = 16, height = 16)
+
+## Table 1: network permutation tests, primary metrics
+# BH adjustment within each analysis block. Count metrics carry the
+# equal-core subsample interval for N contrasts (core-type contrasts need none:
+# within-pair permutations keep each network's core count).
+table1_metrics <- c("n_present", "amf_present", "nif_present",
+                    "density_present", "cross_frac", "cross_density_present")
+
+if (NET_RUN_TESTS) {
+  sub_cols <- if (NET_RUN_SUBSAMPLE) {
+    net_subsample %>%
+      transmute(sub_key = ifelse(stratum == "Pooled", "C Pooled", paste("B", stratum)),
+                metric, contrast, sub_cores = n_cores,
+                sub_mean, sub_lo, sub_hi, sub_same_sign = same_sign)
+  } else {
+    tibble(sub_key = character(), metric = character(), contrast = character())
+  }
+  
+  table1 <- net_tests %>%
+    filter(metric %in% table1_metrics) %>%
+    mutate(sub_key = case_when(analysis == "B: N group and N x core" & !is.na(core_type) ~
+                                 paste("B", core_type),
+                               analysis == "C: N group, pooled" ~ "C Pooled")) %>%
+    left_join(sub_cols, by = c("sub_key", "metric", "contrast")) %>%
+    group_by(analysis) %>%
+    mutate(p_BH = p.adjust(p_value, method = "BH")) %>%
+    ungroup() %>%
+    mutate(metric = factor(metric, levels = table1_metrics)) %>%
+    arrange(analysis, N_group, core_type, contrast, metric) %>%
+    dplyr::select(analysis, N_group, core_type, contrast, metric, observed,
+                  p_value, p_BH, n_perm, any_of(c("sub_cores", "sub_mean", "sub_lo",
+                                                  "sub_hi", "sub_same_sign"))) %>%
+    mutate(across(where(is.numeric) & !any_of(c("n_perm", "sub_cores")), ~ signif(.x, 3)))
+  table1
+  write.csv(table1, "Tables/Table_1_network_permutation_tests.csv", row.names = FALSE)
+}
+
+## Table 2: strongest AMF-diazotroph links
+# Stable edges in the six N group x core type networks (analysis B), which use
+# separate sets of cores, so the network count is a count of independent
+# detections. Detection in the core-type networks (analysis A) is reported
+# separately: A reuses B's cores, so it is not an extra replicate.
+amf_diaz <- function(edges) {
+  edges %>%
+    filter(type == "AMF-diazotroph", stable %in% TRUE) %>%
+    mutate(amf  = ifelse(startsWith(from, "lsu|"), from, to),
+           diaz = ifelse(startsWith(from, "lsu|"), to, from))
+}
+
+links_A <- amf_diaz(edges_A) %>%
+  group_by(amf, diaz) %>%
+  summarise(A_core_types = paste(sort(as.character(core_type)), collapse = "; "),
+            A_max_freq   = max(freq), .groups = "drop")
+
+table2 <- amf_diaz(edges_B) %>%
+  group_by(amf, diaz) %>%
+  summarise(n_networks_B = dplyr::n_distinct(network),
+            networks_B   = paste(network, collapse = "; "),
+            sign         = if (dplyr::n_distinct(sign) == 1) dplyr::first(sign) else "Mixed",
+            mean_freq    = mean(freq),
+            max_freq     = max(freq),
+            mean_weight  = mean(weight),
+            .groups      = "drop") %>%
+  left_join(links_A, by = c("amf", "diaz")) %>%
+  mutate(AMF_taxon        = net_D$label[amf],
+         AMF_group        = net_D$group[amf],
+         Diazotroph_genus = net_D$label[diaz],
+         Diazotroph_class = net_D$group[diaz],
+         A_core_types     = tidyr::replace_na(A_core_types, "Not detected")) %>%
+  arrange(dplyr::desc(n_networks_B), dplyr::desc(mean_freq)) %>%
+  dplyr::select(AMF_taxon, AMF_group, Diazotroph_genus, Diazotroph_class, sign,
+                n_networks_B, networks_B, mean_freq, max_freq, mean_weight,
+                A_core_types, A_max_freq) %>%
+  mutate(across(c(mean_freq, max_freq, mean_weight, A_max_freq), ~ round(.x, 2)))
+
+table2 %>% slice_head(n = 20)                   # main-text table: top links
+write.csv(table2, "Tables/Table_2_AMF_diazotroph_links.csv", row.names = FALSE)
+
+
+## Table S2: soil chemistry models (Kenward-Roger Type II F tests)
+# BH adjustment across chemistry variables within each term (from anova_table())
+tableS2 <- chem_stats %>%
+  mutate(variable = set_names(chem_spec$label, chem_spec$var)[variable],
+         term     = recode(term, N_treatment = "N", core_type = "Core type",
+                           `core_type:N_treatment` = "N x Core type"),
+         term     = factor(term, levels = c("N", "Core type", "N x Core type"))) %>%
+  arrange(factor(variable, levels = chem_spec$label), term) %>%
+  dplyr::select(variable, term, NumDF, DenDF, F = `F value`, p = `Pr(>F)`, p_BH) %>%
+  mutate(across(c(DenDF, F), ~ round(.x, 2)), across(c(p, p_BH), ~ signif(.x, 3)))
+tableS2
+write.csv(tableS2, "Tables/Table_S2_chemistry_models.csv", row.names = FALSE)
+
+## Table S3: envfit vectors on the NMDS ordinations (plot means, n = 24 plots,
+# permutations within blocks)
+tableS3 <- bind_rows(`Diazotrophs (nifH)` = nif_vec$table,
+                     `AMF (LSU)`          = lsu_vec$table, .id = "community") %>%
+  mutate(variable    = dplyr::coalesce(vector_labels[name], name),
+         significant = p < 0.05) %>%
+  arrange(community, p) %>%
+  dplyr::select(community, variable, NMDS1, NMDS2, r2, p, significant) %>%
+  mutate(across(c(NMDS1, NMDS2, r2), ~ round(.x, 3)), p = signif(p, 3))
+tableS3
+write.csv(tableS3, "Tables/Table_S3_envfit_vectors.csv", row.names = FALSE)

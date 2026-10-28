@@ -1,0 +1,19 @@
+"analysis","stratum","metric","contrast","n_cores","observed","sub_mean","sub_lo","sub_hi","same_sign"
+"B: N within core type","Hyphae Enriched","amf_present","High - Low",17,-20,-16.4744744744745,-20,-12,1
+"B: N within core type","Hyphae Enriched","amf_present","Intermediate - Low",17,-5,-7.4974974974975,-14,-1,0.984984984984985
+"B: N within core type","Hyphae Enriched","n_present","High - Low",17,-33,-28.4144144144144,-32,-24,1
+"B: N within core type","Hyphae Enriched","n_present","Intermediate - Low",17,-17,-20.9249249249249,-28,-14,1
+"B: N within core type","Hyphae Enriched","nif_present","High - Low",17,-13,-11.9399399399399,-13,-10,1
+"B: N within core type","Hyphae Enriched","nif_present","Intermediate - Low",17,-12,-13.4274274274274,-16,-11,1
+"B: N within core type","Hyphae Suppressed","amf_present","High - Low",14,-37,-18.7037037037037,-27,-9,1
+"B: N within core type","Hyphae Suppressed","amf_present","Intermediate - Low",14,-33,-16.9379379379379,-26,-7,1
+"B: N within core type","Hyphae Suppressed","n_present","High - Low",14,-48,-28.3213213213213,-37,-19,1
+"B: N within core type","Hyphae Suppressed","n_present","Intermediate - Low",14,-38,-22.6156156156156,-31,-13,1
+"B: N within core type","Hyphae Suppressed","nif_present","High - Low",14,-11,-9.61761761761762,-11,-7,1
+"B: N within core type","Hyphae Suppressed","nif_present","Intermediate - Low",14,-5,-5.67767767767768,-8,-2,0.996996996996997
+"C: N group, pooled","Pooled","amf_present","High - Low",31,-58,-49,-55.05,-41,1
+"C: N group, pooled","Pooled","amf_present","Intermediate - Low",31,-29,-28.3913913913914,-37,-19,1
+"C: N group, pooled","Pooled","n_present","High - Low",31,-69,-59.5925925925926,-66,-51,1
+"C: N group, pooled","Pooled","n_present","Intermediate - Low",31,-33,-33.5805805805806,-42,-23,1
+"C: N group, pooled","Pooled","nif_present","High - Low",31,-11,-10.5925925925926,-11,-9,1
+"C: N group, pooled","Pooled","nif_present","Intermediate - Low",31,-4,-5.18918918918919,-9,-3,1

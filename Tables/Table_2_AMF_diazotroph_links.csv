@@ -1,0 +1,76 @@
+"AMF_taxon","AMF_group","Diazotroph_genus","Diazotroph_class","sign","n_networks_B","networks_B","mean_freq","max_freq","mean_weight","A_core_types","A_max_freq"
+"Paraglomus (ASV_100)","Paraglomus","Skermanella","Alphaproteobacteria","Positive",1,"Low | Hyphae Suppressed",1,1,0.23,"Hyphae Suppressed",0.61
+"Unclassified Glomeromycota (ASV_1218)","Unclassified Glomeromycota","JAAYHS01","UBA4882","Positive",1,"Low | Hyphae Enriched",1,1,0.24,"Hyphae Enriched",0.88
+"Cetraspora (ASV_128)","Cetraspora","Xanthobacter","Alphaproteobacteria","Positive",1,"Low | Hyphae Enriched",1,1,0.19,"Hyphae Enriched",0.83
+"Septoglomus (ASV_42)","Septoglomus","Lachnotalea","Clostridia","Positive",1,"High | Hyphae Enriched",1,1,0.24,"Hyphae Enriched",0.99
+"Paraglomus (ASV_53)","Paraglomus","Azospirillum","Alphaproteobacteria","Positive",1,"Intermediate | Hyphae Enriched",1,1,0.2,"Not detected",NA
+"Paraglomus (ASV_53)","Paraglomus","Trichormus","Cyanobacteriia","Negative",1,"Low | Hyphae Enriched",1,1,-0.23,"Hyphae Enriched",1
+"Unclassified Glomeromycota (ASV_290)","Unclassified Glomeromycota","Janthinobacterium","Gammaproteobacteria","Positive",1,"Intermediate | Hyphae Suppressed",0.97,0.97,0.14,"Not detected",NA
+"Unclassified Glomeromycota (ASV_402)","Unclassified Glomeromycota","YN15","Bacilli","Positive",1,"Intermediate | Hyphae Enriched",0.97,0.97,0.24,"Hyphae Enriched",0.6
+"Gigaspora (ASV_143)","Gigaspora","Massilibacillus","Negativicutes","Positive",1,"Low | Hyphae Suppressed",0.96,0.96,0.31,"Not detected",NA
+"Gigaspora (ASV_71)","Gigaspora","Azospirillum","Alphaproteobacteria","Positive",1,"Low | Hyphae Suppressed",0.96,0.96,0.15,"Not detected",NA
+"Gigaspora (ASV_112)","Gigaspora","JACPFJ01","Desulfuromonadia","Negative",1,"Low | Hyphae Suppressed",0.95,0.95,-0.29,"Not detected",NA
+"Gigaspora (ASV_71)","Gigaspora","UBA933","Clostridia","Positive",1,"High | Hyphae Enriched",0.93,0.93,0.18,"Not detected",NA
+"Acaulospora (ASV_84)","Acaulospora","Janthinobacterium","Gammaproteobacteria","Positive",1,"Low | Hyphae Suppressed",0.92,0.92,0.14,"Not detected",NA
+"Diversispora (ASV_359)","Diversispora","Ruminiclostridium_D","Clostridia","Negative",1,"Low | Hyphae Enriched",0.89,0.89,-0.16,"Not detected",NA
+"Paraglomus (ASV_108)","Paraglomus","Holophaga","Holophagae","Negative",1,"Low | Hyphae Enriched",0.88,0.88,-0.09,"Not detected",NA
+"Septoglomus (ASV_265)","Septoglomus","Anaeromyxobacter","Myxococcia","Positive",1,"Low | Hyphae Suppressed",0.87,0.87,0.21,"Not detected",NA
+"Paraglomus (ASV_116)","Paraglomus","CTSoil-075","Negativicutes","Negative",1,"Low | Hyphae Suppressed",0.86,0.86,-0.15,"Not detected",NA
+"Cetraspora (ASV_170)","Cetraspora","Clostridium_AD","Clostridia","Negative",1,"Intermediate | Hyphae Enriched",0.86,0.86,-0.08,"Not detected",NA
+"Diversispora (ASV_3672)","Diversispora","Geomesophilobacter","Desulfuromonadia","Positive",1,"Low | Hyphae Suppressed",0.85,0.85,0.11,"Not detected",NA
+"Gigaspora (ASV_112)","Gigaspora","JACMJL01","Clostridia","Positive",1,"Intermediate | Hyphae Suppressed",0.84,0.84,0.09,"Not detected",NA
+"Diversispora (ASV_280)","Diversispora","VEOV01","Desulfuromonadia","Negative",1,"Low | Hyphae Enriched",0.81,0.81,-0.09,"Not detected",NA
+"Unclassified Glomeromycota (ASV_7)","Unclassified Glomeromycota","Xanthobacter","Alphaproteobacteria","Positive",1,"High | Hyphae Suppressed",0.81,0.81,0.09,"Not detected",NA
+"Cetraspora (ASV_1052)","Cetraspora","CAIPTY01","Desulfuromonadia","Positive",1,"Low | Hyphae Enriched",0.79,0.79,0.12,"Not detected",NA
+"Diversispora (ASV_274)","Diversispora","Geomobilimonas","Desulfuromonadia","Negative",1,"Low | Hyphae Enriched",0.78,0.78,-0.08,"Hyphae Enriched",0.95
+"Cetraspora (ASV_117)","Cetraspora","Lachnotalea","Clostridia","Negative",1,"Low | Hyphae Suppressed",0.76,0.76,-0.09,"Not detected",NA
+"Gigaspora (ASV_143)","Gigaspora","Pseudoclostridium","Clostridia","Positive",1,"Low | Hyphae Suppressed",0.75,0.75,0.12,"Not detected",NA
+"Acaulospora (ASV_84)","Acaulospora","Skermanella","Alphaproteobacteria","Positive",1,"Low | Hyphae Suppressed",0.74,0.74,0.06,"Not detected",NA
+"Cetraspora (ASV_196)","Cetraspora","JACMJL01","Clostridia","Positive",1,"Low | Hyphae Enriched",0.73,0.73,0.1,"Not detected",NA
+"Paraglomus (ASV_108)","Paraglomus","VEOV01","Desulfuromonadia","Positive",1,"Intermediate | Hyphae Enriched",0.72,0.72,0.07,"Hyphae Enriched",0.75
+"Unclassified Diversisporaceae (ASV_91)","Unclassified Diversisporaceae","CTSoil-075","Negativicutes","Negative",1,"Low | Hyphae Suppressed",0.72,0.72,-0.13,"Not detected",NA
+"Paraglomus (ASV_107)","Paraglomus","Solidesulfovibrio","Desulfovibrionia","Positive",1,"Low | Hyphae Suppressed",0.71,0.71,0.07,"Not detected",NA
+"Rhizophagus (ASV_158)","Rhizophagus","Geomonas","Desulfuromonadia","Negative",1,"Intermediate | Hyphae Enriched",0.7,0.7,-0.05,"Not detected",NA
+"Unclassified Glomeromycota (ASV_7)","Unclassified Glomeromycota","JACMJL01","Clostridia","Negative",1,"Low | Hyphae Enriched",0.7,0.7,-0.05,"Not detected",NA
+"Gigaspora (ASV_143)","Gigaspora","Geotalea","Desulfuromonadia","Negative",1,"Low | Hyphae Suppressed",0.69,0.69,-0.06,"Not detected",NA
+"Cetraspora (ASV_196)","Cetraspora","CAIPTY01","Desulfuromonadia","Positive",1,"Low | Hyphae Enriched",0.67,0.67,0.05,"Not detected",NA
+"Diversispora (ASV_85)","Diversispora","Ruminiclostridium","Clostridia","Positive",1,"Low | Hyphae Suppressed",0.67,0.67,0.06,"Not detected",NA
+"Unclassified Glomeromycota (ASV_7)","Unclassified Glomeromycota","Aromatoleum","Gammaproteobacteria","Positive",1,"Low | Hyphae Enriched",0.66,0.66,0.06,"Not detected",NA
+"Unclassified Glomeromycota (ASV_70)","Unclassified Glomeromycota","UBA4719","Actinomycetia","Positive",1,"High | Hyphae Enriched",0.65,0.65,0.1,"Not detected",NA
+"Gigaspora (ASV_71)","Gigaspora","Anaerocolumna","Clostridia","Positive",1,"Low | Hyphae Enriched",0.65,0.65,0.05,"Not detected",NA
+"Cetraspora (ASV_128)","Cetraspora","Geomonas","Desulfuromonadia","Positive",1,"Low | Hyphae Suppressed",0.64,0.64,0.11,"Not detected",NA
+"Cetraspora (ASV_196)","Cetraspora","Solidesulfovibrio","Desulfovibrionia","Positive",1,"Low | Hyphae Suppressed",0.64,0.64,0.05,"Not detected",NA
+"Septoglomus (ASV_265)","Septoglomus","Pseudobacteroides","Clostridia","Positive",1,"Low | Hyphae Suppressed",0.64,0.64,0.07,"Not detected",NA
+"Paraglomus (ASV_160)","Paraglomus","JACMJL01","Clostridia","Positive",1,"Low | Hyphae Enriched",0.63,0.63,0.04,"Not detected",NA
+"Unclassified Glomeromycota (ASV_290)","Unclassified Glomeromycota","Nostoc","Cyanobacteriia","Negative",1,"High | Hyphae Suppressed",0.63,0.63,-0.07,"Not detected",NA
+"Septoglomus (ASV_42)","Septoglomus","UBA933","Clostridia","Positive",1,"High | Hyphae Suppressed",0.63,0.63,0.02,"Not detected",NA
+"Rhizophagus (ASV_63)","Rhizophagus","Paenibacillus_A","Bacilli","Positive",1,"Low | Hyphae Enriched",0.63,0.63,0.08,"Not detected",NA
+"Cetraspora (ASV_244)","Cetraspora","Ruminiclostridium","Clostridia","Positive",1,"Low | Hyphae Enriched",0.62,0.62,0.06,"Not detected",NA
+"Unclassified Diversisporaceae (ASV_135)","Unclassified Diversisporaceae","Geomonas","Desulfuromonadia","Positive",1,"Low | Hyphae Enriched",0.61,0.61,0.06,"Not detected",NA
+"Gigaspora (ASV_143)","Gigaspora","Ruminiclostridium_D","Clostridia","Positive",1,"Intermediate | Hyphae Enriched",0.61,0.61,0.06,"Not detected",NA
+"Paraglomus (ASV_53)","Paraglomus","Anaerocolumna","Clostridia","Negative",1,"Low | Hyphae Suppressed",0.61,0.61,-0.08,"Hyphae Suppressed",0.77
+"Diversispora (ASV_776)","Diversispora","Aromatoleum","Gammaproteobacteria","Negative",1,"Low | Hyphae Enriched",0.61,0.61,-0.04,"Hyphae Enriched",0.94
+"Paraglomus (ASV_132)","Paraglomus","Methylobacterium","Alphaproteobacteria","Positive",1,"Low | Hyphae Enriched",0.6,0.6,0.06,"Not detected",NA
+"Paraglomus (ASV_160)","Paraglomus","Janthinobacterium","Gammaproteobacteria","Negative",1,"Low | Hyphae Enriched",0.6,0.6,-0.04,"Not detected",NA
+"Diversispora (ASV_776)","Diversispora","Aulosira","Cyanobacteriia","Positive",1,"Low | Hyphae Enriched",0.6,0.6,0.07,"Not detected",NA
+"Paraglomus (ASV_108)","Paraglomus","Clostridium_I","Clostridia","Negative",1,"Intermediate | Hyphae Enriched",0.59,0.59,-0.03,"Not detected",NA
+"Diversispora (ASV_776)","Diversispora","Clostridium_AD","Clostridia","Negative",1,"Low | Hyphae Enriched",0.59,0.59,-0.14,"Not detected",NA
+"Gigaspora (ASV_94)","Gigaspora","Lacrimispora","Clostridia","Positive",1,"Intermediate | Hyphae Suppressed",0.59,0.59,0.01,"Hyphae Suppressed",0.85
+"Gigaspora (ASV_71)","Gigaspora","JAEUMD01","Alphaproteobacteria","Negative",1,"High | Hyphae Enriched",0.58,0.58,-0.02,"Not detected",NA
+"Gigaspora (ASV_71)","Gigaspora","Clostridium","Clostridia","Positive",1,"Intermediate | Hyphae Enriched",0.58,0.58,0.01,"Not detected",NA
+"Cetraspora (ASV_128)","Cetraspora","R267","Myxococcia","Negative",1,"Low | Hyphae Enriched",0.57,0.57,-0.06,"Not detected",NA
+"Cetraspora (ASV_432)","Cetraspora","R267","Myxococcia","Negative",1,"Low | Hyphae Suppressed",0.57,0.57,-0.05,"Hyphae Suppressed",0.85
+"Unclassified Glomeromycota (ASV_7)","Unclassified Glomeromycota","CTSoil-075","Negativicutes","Positive",1,"Intermediate | Hyphae Enriched",0.57,0.57,0.02,"Not detected",NA
+"Unclassified Glomeromycota (ASV_290)","Unclassified Glomeromycota","Methylobacterium","Alphaproteobacteria","Negative",1,"High | Hyphae Suppressed",0.56,0.56,-0.05,"Hyphae Suppressed",0.82
+"Septoglomus (ASV_42)","Septoglomus","Xanthobacter","Alphaproteobacteria","Negative",1,"Low | Hyphae Suppressed",0.56,0.56,-0.13,"Not detected",NA
+"Paraglomus (ASV_132)","Paraglomus","Janthinobacterium","Gammaproteobacteria","Negative",1,"Low | Hyphae Enriched",0.54,0.54,-0.03,"Hyphae Enriched",0.58
+"Unclassified Diversisporaceae (ASV_135)","Unclassified Diversisporaceae","YN15","Bacilli","Negative",1,"Low | Hyphae Enriched",0.54,0.54,-0.03,"Not detected",NA
+"Diversispora (ASV_204)","Diversispora","Prochlorococcus_A","Cyanobacteriia","Negative",1,"Low | Hyphae Enriched",0.54,0.54,-0.05,"Hyphae Enriched",0.75
+"Gigaspora (ASV_94)","Gigaspora","Mobilitalea","Clostridia","Positive",1,"Intermediate | Hyphae Enriched",0.54,0.54,0.05,"Not detected",NA
+"Paraglomus (ASV_107)","Paraglomus","JAAXWY01","Coriobacteriia","Positive",1,"Low | Hyphae Suppressed",0.53,0.53,0.03,"Hyphae Suppressed",0.94
+"Paraglomus (ASV_108)","Paraglomus","Anaeromyxobacter","Myxococcia","Negative",1,"Low | Hyphae Enriched",0.53,0.53,-0.08,"Hyphae Enriched",0.62
+"Unclassified Glomeromycota (ASV_7)","Unclassified Glomeromycota","Clostridium","Clostridia","Positive",1,"Low | Hyphae Suppressed",0.53,0.53,0.03,"Not detected",NA
+"Cetraspora (ASV_128)","Cetraspora","Massilibacillus","Negativicutes","Positive",1,"Low | Hyphae Enriched",0.5,0.5,0.02,"Not detected",NA
+"Paraglomus (ASV_132)","Paraglomus","Aromatoleum","Gammaproteobacteria","Positive",1,"Intermediate | Hyphae Enriched",0.5,0.5,0,"Not detected",NA
+"Paraglomus (ASV_25)","Paraglomus","Trichormus","Cyanobacteriia","Negative",1,"Low | Hyphae Enriched",0.5,0.5,-0.02,"Hyphae Enriched",0.76
+"Unclassified Glomeromycota (ASV_7)","Unclassified Glomeromycota","Desulfosporosinus","Desulfitobacteriia","Negative",1,"High | Hyphae Enriched",0.5,0.5,0,"Not detected",NA
